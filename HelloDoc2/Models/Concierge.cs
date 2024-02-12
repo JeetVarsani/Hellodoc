@@ -19,13 +19,13 @@ public partial class Concierge
 
     public string ZipCode { get; set; } = null!;
 
-    public DateOnly CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
-    public int RegionId { get; set; }
+    public int? RegionId { get; set; }
 
     public string? RoleId { get; set; }
 
-    public virtual Region Region { get; set; } = null!;
+    public virtual Region? Region { get; set; }
 
     public virtual ICollection<RequestConcierge> RequestConcierges { get; set; } = new List<RequestConcierge>();
 }

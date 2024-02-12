@@ -32,7 +32,5 @@ public partial class RequestStatusLog
 
     public virtual Request Request { get; set; } = null!;
 
-    public virtual ICollection<RequestClosed> RequestCloseds { get; set; } = new List<RequestClosed>();
-
     public virtual Physician? TransToPhysician { get; set; }
 }

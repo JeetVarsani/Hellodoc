@@ -2,7 +2,7 @@
 {
     public class PatientData
     {
-        public String Symptoms { get; set; }
+        public string Symptoms { get; set; }
         public string FirstName { get; set; }
             
         public string LastName { get; set; }

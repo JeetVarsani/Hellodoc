@@ -11,6 +11,7 @@ var provider = builder.Services.BuildServiceProvider();
 //builder.Services.AddDbContext<ApplicationDbContext>();
 var config = provider.GetRequiredService<IConfiguration>();
 builder.Services.AddDbContext<HellodocContext>(item => item.UseNpgsql(config.GetConnectionString("dbcs")));
+builder.Services.AddSession();
 var app = builder.Build();
 
 
@@ -24,6 +25,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

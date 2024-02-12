@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eirXvBCLSBtcpINeKyJ7SbwlbOXzneOJqNW6kPv0SDI=",
+  "Hash": "fLtTZrt0Qx78Oan09WRw/RDU/6lI0I97qMibYwet7pk=",
   "Source": "HelloDoc2",
   "BasePath": "_content/HelloDoc2",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\forgotPassword.css"
+    },
+    {
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\css\\PatientDashboard.css",
+      "SourceId": "HelloDoc2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
+      "BasePath": "_content/HelloDoc2",
+      "RelativePath": "css/PatientDashboard.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\PatientDashboard.css"
     },
     {
       "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\css\\patientlogin.css",

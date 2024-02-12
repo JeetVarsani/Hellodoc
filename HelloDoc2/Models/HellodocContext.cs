@@ -192,16 +192,18 @@ public partial class HellodocContext : DbContext
 
             entity.ToTable("Business");
 
-            entity.Property(e => e.BusinessId).ValueGeneratedNever();
+            entity.Property(e => e.BusinessId).HasIdentityOptions(null, null, null, 10000L, null, null);
             entity.Property(e => e.Address1).HasMaxLength(500);
             entity.Property(e => e.Address2).HasMaxLength(500);
             entity.Property(e => e.City).HasMaxLength(50);
+            entity.Property(e => e.CreatedDate).HasColumnType("timestamp without time zone");
             entity.Property(e => e.FaxNumber).HasMaxLength(20);
             entity.Property(e => e.Ip)
                 .HasMaxLength(20)
                 .HasColumnName("IP");
             entity.Property(e => e.IsDeleted).HasColumnType("bit(1)");
             entity.Property(e => e.IsRegistered).HasColumnType("bit(1)");
+            entity.Property(e => e.ModifiedDate).HasColumnType("timestamp without time zone");
             entity.Property(e => e.Name).HasMaxLength(128);
             entity.Property(e => e.PhoneNumber).HasMaxLength(20);
             entity.Property(e => e.ZipCode).HasMaxLength(100);
@@ -234,10 +236,11 @@ public partial class HellodocContext : DbContext
 
             entity.ToTable("Concierge");
 
-            entity.Property(e => e.ConciergeId).ValueGeneratedNever();
+            entity.Property(e => e.ConciergeId).HasIdentityOptions(null, null, null, 10000L, null, null);
             entity.Property(e => e.Address).HasMaxLength(150);
             entity.Property(e => e.City).HasMaxLength(50);
             entity.Property(e => e.ConciergeName).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasColumnType("timestamp without time zone");
             entity.Property(e => e.RoleId).HasMaxLength(20);
             entity.Property(e => e.State).HasMaxLength(50);
             entity.Property(e => e.Street).HasMaxLength(50);
@@ -245,7 +248,6 @@ public partial class HellodocContext : DbContext
 
             entity.HasOne(d => d.Region).WithMany(p => p.Concierges)
                 .HasForeignKey(d => d.RegionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Concierge_RegionId_fkey");
         });
 
@@ -525,7 +527,6 @@ public partial class HellodocContext : DbContext
 
             entity.HasOne(d => d.Request).WithMany(p => p.RequestClients)
                 .HasForeignKey(d => d.RequestId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("RequestClient_RequestId_fkey");
         });
 
@@ -546,11 +547,6 @@ public partial class HellodocContext : DbContext
                 .HasForeignKey(d => d.RequestId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("RequestClosed_RequestId_fkey");
-
-            entity.HasOne(d => d.RequestStatusLog).WithMany(p => p.RequestCloseds)
-                .HasForeignKey(d => d.RequestStatusLogId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("RequestClosed_RequestStatusLogId_fkey");
         });
 
         modelBuilder.Entity<RequestConcierge>(entity =>
@@ -614,7 +610,8 @@ public partial class HellodocContext : DbContext
 
             entity.ToTable("RequestStatusLog");
 
-            entity.Property(e => e.RequestStatusLogId).ValueGeneratedNever();
+            entity.Property(e => e.RequestStatusLogId).HasIdentityOptions(null, null, null, 10000L, null, null);
+            entity.Property(e => e.CreatedDate).HasColumnType("timestamp without time zone");
             entity.Property(e => e.Ip)
                 .HasMaxLength(20)
                 .HasColumnName("IP");
@@ -656,7 +653,7 @@ public partial class HellodocContext : DbContext
             entity.ToTable("RequestWiseFile");
 
             entity.Property(e => e.RequestWiseFileId)
-                .ValueGeneratedNever()
+                .HasIdentityOptions(null, null, null, 10000L, null, null)
                 .HasColumnName("RequestWiseFileID");
             entity.Property(e => e.FileName).HasMaxLength(500);
             entity.Property(e => e.Ip)

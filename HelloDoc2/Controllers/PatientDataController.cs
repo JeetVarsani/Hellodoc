@@ -37,7 +37,7 @@ namespace HelloDoc2.Controllers
                     aspNetUser.UserName = model.FirstName;
                     aspNetUser.Email = model.Email;
                     aspNetUser.Phonenumber = model.Phone;
-                    //aspNetUser.CreatedDate = DateTime.Now;
+                    aspNetUser.CreatedDate = DateTime.Now;
                     aspNetUser.PasswordHash = model.PasswordHash;
                     _context.AspNetUsers.Add(aspNetUser);
                     await _context.SaveChangesAsync();
@@ -66,7 +66,7 @@ namespace HelloDoc2.Controllers
                 request.PhoneNumber = model.Phone;
                 request.Email = model.Email;
                 request.Status = 1;
-                //request.CreatedDate = DateTime.Now;
+                request.CreatedDate = DateTime.Now;
                 _context.Requests.Add(request);
                 await _context.SaveChangesAsync();
 
@@ -81,7 +81,7 @@ namespace HelloDoc2.Controllers
                 requestStatusLog.RequestId = request.RequestId;
                 requestStatusLog.Status = 1;
                 requestStatusLog.Notes = model.Symptoms;
-                //requestStatusLog.CreatedDate = DateTime.Now;
+                requestStatusLog.CreatedDate = DateTime.Now;
                 _context.RequestStatusLogs.Add(requestStatusLog);
                 await _context.SaveChangesAsync();
             

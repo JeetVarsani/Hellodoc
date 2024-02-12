@@ -27,12 +27,18 @@ namespace HelloDoc2.Controllers
         {
             return View();
         }
+        public IActionResult PatientDashboard()
+        {
+            ViewBag.UserName = HttpContext.Session.GetString("session1");
+            return View();
+        }
         public IActionResult Patient_Login(AspNetUser model)
         {
             var user = _context.AspNetUsers.FirstOrDefault(u => u.Email == model.Email && u.PasswordHash == model.PasswordHash );
             if (user != null)
             {
-                return RedirectToAction("Submit_Request", "Home");
+                HttpContext.Session.SetString("session1",user.UserName);
+                return RedirectToAction("PatientDashboard", "Home");
             }
             else {
                 ModelState.AddModelError(String.Empty,"Invalid email or Password");

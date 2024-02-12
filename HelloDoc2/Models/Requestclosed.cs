@@ -18,6 +18,4 @@ public partial class RequestClosed
     public string? Ip { get; set; }
 
     public virtual Request Request { get; set; } = null!;
-
-    public virtual RequestStatusLog RequestStatusLog { get; set; } = null!;
 }

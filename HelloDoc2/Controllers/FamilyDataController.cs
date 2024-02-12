@@ -28,12 +28,12 @@ namespace HelloDoc2.Controllers
             request.FirstName = model.F_FirstName;
             request.LastName = model.F_LastName;
             request.Email = model.F_Email;
+            request.CreatedDate = DateTime.Now;
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
 
 
 
-            requestClient.RequestClientId = 2;
             requestClient.RequestId = request.RequestId;
             requestClient.FirstName = model.FirstName;
             requestClient.LastName = model.LastName;

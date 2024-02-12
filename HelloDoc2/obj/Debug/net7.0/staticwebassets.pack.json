@@ -593,6 +593,10 @@
       "PackagePath": "staticwebassets\\SRS Screen Shorts\\login-banner.png"
     },
     {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\css\\PatientDashboard.css",
+      "PackagePath": "staticwebassets\\css\\PatientDashboard.css"
+    },
+    {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\css\\business.css",
       "PackagePath": "staticwebassets\\css\\business.css"
     },

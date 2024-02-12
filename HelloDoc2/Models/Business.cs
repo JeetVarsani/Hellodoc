@@ -26,9 +26,9 @@ public partial class Business
 
     public BitArray? IsRegistered { get; set; }
 
-    public DateOnly? CreatedDate { get; set; }
+    public DateTime? CreatedDate { get; set; }
 
-    public DateOnly? ModifiedDate { get; set; }
+    public DateTime? ModifiedDate { get; set; }
 
     public short? Status { get; set; }
 
