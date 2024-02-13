@@ -31,14 +31,20 @@
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                 <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" asp-for="FirstName">
                 <label for="floatingInput" style="margin-left: 1em;">First Name</label>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+
             </div>
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                     <input type="text" class="form-control" id="floatingPassword" placeholder="Password" asp-for="LastName">
                 <label for="floatingInput" style="margin-left: 1em;">Last Name</label>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+
             </div>
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                     <input type="date" class="form-control" id="floatingPassword" placeholder="12/11/2023" asp-for="BirthDate">
                 <label for="floatingDate" style="margin-left: 1em;">Date Of Birth</label>
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+
             </div>
         </div>
 
@@ -47,19 +53,27 @@
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                     <input type="email" class="form-control" id="Emailforlogin" placeholder="Email" onBlur="checkemailexists()" asp-for="Email">
                     <label class="t1" for="Emailforlogin" style="margin-left: 1em;">Email</label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+
             </div>
             <div class="form-floating mb-3 col-md-6 col-sm-12 ">
                     <input id="phone" type="tel" class="form-control" style="height: 60px;" asp-for="Phone">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+
             </div>  
         </div>
         <div class="row mb-4 ">
                 <div class="form-floating mb-3 col-md-6 col-sm-12 checkmail" id="passwordfields1">
                     <input type="password" class="form-control " id="floatingInput5" asp-for="PasswordHash" placeholder="Password" >
                     <label for="floatingInput5" style="margin-left: 1em;">Password</label>
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+
                 </div>
                 <div class="form-floating mb-3 col-md-6 col-sm-12 checkmail" id="passwordfields2">
                     <input type="password" class="form-control" id="floatingInput4" asp-for="PasswordHash" placeholder="Confirm Password" >
                     <label for="floatingInput4" style="margin-left: 1em;">Confirm Password</label>
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+
                 </div>
         </div>
         <h2 class="same-text">Patient Location</h2>
@@ -67,18 +81,26 @@
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                 <input type="text" class="form-control" id="floatingInput" placeholder="Street" asp-for="Street">
                 <label for="floatingInput" style="margin-left: 1em">Street</label>
+                    <span asp-validation-for="Street" class="text-danger"></span>
+
             </div>
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                 <input type="text" class="form-control" id="floatingPassword" placeholder="City" asp-for="City">
                 <label for="floatingInput" style="margin-left: 1em">City</label>
+                    <span asp-validation-for="City" class="text-danger"></span>
+
             </div>
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                 <input type="text" class="form-control" id="floatingPassword" placeholder="State" asp-for="State">
                 <label for="floatingInput" style="margin-left: 1em">State</label>
+                    <span asp-validation-for="State" class="text-danger"></span>
+
             </div>
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                 <input type="text" class="form-control" id="floatingInput" placeholder="Zipcode" asp-for="ZipCode">
                 <label for="floatingInput" style="margin-left: 1em">Zip Code</label>
+                    <span asp-validation-for="ZipCode" class="text-danger"></span>
+
             </div>
             <div class="form-floating mb-3 col-md-6 col-sm-12">
                 <input type="text" class="form-control" id="floatingPassword" placeholder="Roomno" asp-for="Room">
@@ -157,3 +179,10 @@
             .catch(error => console.error('error:', error));
     }
 </script>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

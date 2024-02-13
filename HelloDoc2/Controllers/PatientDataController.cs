@@ -51,7 +51,7 @@ namespace HelloDoc2.Controllers
                     user.State = model.State;
                     user.ZipCode = model.ZipCode;
                     user.CreatedBy = "1";
-                    //user.CreatedDate = DateTime.Now;
+                    user.CreatedDate = DateTime.Now;
                     user.StrMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(model.BirthDate.Month);
                     user.IntYear = model.BirthDate.Year;
                     user.IntDate = model.BirthDate.Day;
@@ -66,6 +66,7 @@ namespace HelloDoc2.Controllers
                 request.PhoneNumber = model.Phone;
                 request.Email = model.Email;
                 request.Status = 1;
+                request.UserId = user.UserId;
                 request.CreatedDate = DateTime.Now;
                 _context.Requests.Add(request);
                 await _context.SaveChangesAsync();
@@ -84,7 +85,13 @@ namespace HelloDoc2.Controllers
                 requestStatusLog.CreatedDate = DateTime.Now;
                 _context.RequestStatusLogs.Add(requestStatusLog);
                 await _context.SaveChangesAsync();
-            
+
+                requestStatusLog.RequestId = request.RequestId;
+                requestStatusLog.Notes = model.Symptoms;
+                requestStatusLog.Status = 2;
+                _context.RequestStatusLogs.Add(requestStatusLog);
+                await _context.SaveChangesAsync();
+
 
             return RedirectToAction("Index", "Home");
         }

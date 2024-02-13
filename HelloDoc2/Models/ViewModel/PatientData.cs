@@ -1,24 +1,49 @@
-﻿namespace HelloDoc2.Models.ViewModel
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HelloDoc2.Models.ViewModel
 {
     public class PatientData
     {
         public string Symptoms { get; set; }
+
+        [Required(ErrorMessage = "Please Enter the First Name")]
         public string FirstName { get; set; }
             
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please Enter the First Name")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please Enter the First Name")]
         public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Please Enter the First Name")]
         public DateTime BirthDate { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Confirm Password")]
         public string PasswordHash { get; set; }
-        
+
+        [Required(ErrorMessage = "Please Enter Email")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Please Enter Street")]
         public string Street { get; set; }
+
+        [Required(ErrorMessage = "Please Enter City")]
         public string City { get; set; }
+
+        [Required(ErrorMessage = "Please Enter State")]
         public string State { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Zip Code")]
         public string ZipCode { get; set; }
+
+
         public string? Room { get; set; }
 
+        [Required(ErrorMessage = "Please Upload File")]
         public string File { get; set; }
-
+        public string Status { get; set; }  
+        public string CreatedDate { get; set; }
     }
 }   

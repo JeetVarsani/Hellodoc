@@ -52,7 +52,7 @@ namespace HelloDoc2.Controllers
             _context.RequestClients.Add(requestClient);
             await _context.SaveChangesAsync();
 
-            requestStatusLog.RequestStatusLogId = 1;
+            //requestStatusLog.RequestStatusLogId = 1;
             requestStatusLog.RequestId = request.RequestId;
             requestStatusLog.Notes = model.Symptoms;
             requestStatusLog.Status = 2;
