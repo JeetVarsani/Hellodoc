@@ -19,7 +19,7 @@
         </a>
         </button>
     </div>
-    <form method="post" asp-action="Index" asp-controller="PatientData">
+    <form method="post" asp-action="Index" asp-controller="PatientData" enctype="multipart/form-data">
     <div class="container-fluid formpart">
         <h2 class="header-text">Patient Information</h2>
         <div class="form-floating input-detail">
@@ -117,7 +117,7 @@
                     <span class="for-remove-upload ">Upload</span>
                 </button>
                 <input id="patietent-file-input" multiple class="file-input-hover-effect" type="file"
-                       style="position: absolute; right: -8px;top: 0.5rem; opacity: 0;">
+                       style="position: absolute; right: -8px;top: 0.5rem; opacity: 0;" asp-for="Filepath">
             </div>
         </div>
         <div class="d-flex justify-content-end mt-4 mb-3">

@@ -873,6 +873,22 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\42dashboard-default.svg",
+      "PackagePath": "staticwebassets\\upload\\42dashboard-default.svg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\44check-icon.svg",
+      "PackagePath": "staticwebassets\\upload\\44check-icon.svg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\45logo.svg",
+      "PackagePath": "staticwebassets\\upload\\45logo.svg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\46user-default.svg",
+      "PackagePath": "staticwebassets\\upload\\46user-default.svg"
+    },
+    {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.HelloDoc2.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

@@ -38,12 +38,12 @@ namespace HelloDoc2.Models.ViewModel
         [Required(ErrorMessage = "Please Enter Zip Code")]
         public string ZipCode { get; set; }
 
-
         public string? Room { get; set; }
 
-        [Required(ErrorMessage = "Please Upload File")]
-        public string File { get; set; }
+        public string Documents { get; set; }
         public string Status { get; set; }  
         public string CreatedDate { get; set; }
+
+        public IFormFile? Filepath { get; set; } = null;
     }
 }   

@@ -13,11 +13,14 @@
     <Compile Remove="Views\Home\FamilyFriendsForm.cshtml.cs" />
     <Compile Remove="Views\Home\Forgot_Password.cshtml.cs" />
     <Compile Remove="Views\Home\PatientDashboard.cshtml.cs" />
+    <Compile Remove="Views\Home\PatientDashboardProfile.cshtml.cs" />
     <Compile Remove="Views\Home\PatientRequestForm.cshtml.cs" />
     <Compile Remove="Views\Home\Patient_Login.cshtml.cs" />
     <Compile Remove="Views\Home\Patient_Site.cshtml.cs" />
     <Compile Remove="Views\Home\Submit_Request.cshtml.cs" />
     <Compile Remove="Views\Home\user.cshtml.cs" />
+    <Compile Remove="Views\Home\ViewDocument.cshtml.cs" />
+    <Compile Remove="Views\Shared\_LayoutDashboard.cshtml.cs" />
     <Compile Remove="Views\Shared\_LayoutNone.cshtml.cs" />
   </ItemGroup>
 
@@ -37,6 +40,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\upload\" />
   </ItemGroup>
 
 </Project>

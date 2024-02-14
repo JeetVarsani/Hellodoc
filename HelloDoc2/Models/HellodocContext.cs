@@ -655,6 +655,7 @@ public partial class HellodocContext : DbContext
             entity.Property(e => e.RequestWiseFileId)
                 .HasIdentityOptions(null, null, null, 10000L, null, null)
                 .HasColumnName("RequestWiseFileID");
+            entity.Property(e => e.CreatedDate).HasColumnType("timestamp without time zone");
             entity.Property(e => e.FileName).HasMaxLength(500);
             entity.Property(e => e.Ip)
                 .HasMaxLength(20)

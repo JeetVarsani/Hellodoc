@@ -26,8 +26,8 @@ namespace HelloDoc2.Controllers
 
             RequestStatusLog requestStatusLog = new RequestStatusLog();
 
-            RequestWiseFile requestWiseFile = new RequestWiseFile();
 
+            RequestWiseFile requestWiseFile = new RequestWiseFile();
 
             var existUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
 
@@ -86,27 +86,33 @@ namespace HelloDoc2.Controllers
                 _context.RequestStatusLogs.Add(requestStatusLog);
                 await _context.SaveChangesAsync();
 
-                requestStatusLog.RequestId = request.RequestId;
-                requestStatusLog.Notes = model.Symptoms;
-                requestStatusLog.Status = 2;
-                _context.RequestStatusLogs.Add(requestStatusLog);
-                await _context.SaveChangesAsync();
+                if (model.Filepath != null)
+                {
 
+                    IFormFile SingleFile = model.Filepath;
+                    requestWiseFile.RequestId = request.RequestId;
+                    requestWiseFile.CreatedDate = DateTime.Now;
+                    requestWiseFile.FileName = SingleFile.FileName;
+                    _context.Add(requestWiseFile);
+                    await _context.SaveChangesAsync();
+                    var filePath = Path.Combine("wwwroot", "upload", requestWiseFile.RequestId.ToString() + Path.GetFileName(SingleFile.FileName));
+                    using (FileStream stream = System.IO.File.Create(filePath))
+                    {
+                        // The file is saved in a buffer before being processed
+                        await SingleFile.CopyToAsync(stream);
+                    }
+                }
+                User user1 = _context.Users.Where(s => s.Email == model.Email).FirstOrDefault();
 
-            return RedirectToAction("Index", "Home");
-        }
-        public IActionResult checkEmail(string Email)
-        {
-            var ans = _context.AspNetUsers.SingleOrDefault(x => x.Email == Email);
-            bool isExist;
-            if (ans == null)
-            {
-                return Json(new { isExist = false });
+                if (user1 != null)
+                {
+                    List<Request> requests = _context.Requests.Where(x => x.Email == model.Email).ToList();
+                    requests.ForEach(x => x.UserId = user1.UserId);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToAction("Index", "Home");
             }
-            else
-                return Json(new { isExist = true });
-        }
-
+    
 
         [Route("/Home/PatientRequestForm/checkemailexists/{email}")]
 

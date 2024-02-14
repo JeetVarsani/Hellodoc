@@ -1,5 +1,4 @@
-﻿//using AspNetCore;
-using HelloDoc2.Models;
+﻿using HelloDoc2.Models;
 using HelloDoc2.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -17,6 +16,7 @@ namespace HelloDoc2.Controllers
 
         public IActionResult Index()
         {
+            var model = new List<HelloDoc2.Models.ViewModel.PatientData>();
             return View();
         }
 
@@ -50,7 +50,7 @@ namespace HelloDoc2.Controllers
             {
                 PatientData patientrequest = new PatientData();
                 patientrequest.CreatedDate = r.CreatedDate.ToString();
-                patientrequest.File = r.FileName;
+                patientrequest.Documents = r.FileName;
                 patientrequest.Id = r.RequestId;
                 patientrequest.Status = r.Status.ToString();
                 list.Add(patientrequest);
@@ -100,6 +100,17 @@ namespace HelloDoc2.Controllers
         {
             return View();
         }
+
+        public IActionResult PatientDashboardProfile()
+        {
+            return View();
+        }
+
+        public IActionResult ViewDocument() 
+        { 
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
