@@ -80,7 +80,7 @@ namespace HelloDoc2.Controllers
                 await _context.SaveChangesAsync();
 
                 requestStatusLog.RequestId = request.RequestId;
-                requestStatusLog.Status = 1;
+                requestStatusLog.Status = 3;
                 requestStatusLog.Notes = model.Symptoms;
                 requestStatusLog.CreatedDate = DateTime.Now;
                 _context.RequestStatusLogs.Add(requestStatusLog);
@@ -95,7 +95,7 @@ namespace HelloDoc2.Controllers
                     requestWiseFile.FileName = SingleFile.FileName;
                     _context.Add(requestWiseFile);
                     await _context.SaveChangesAsync();
-                    var filePath = Path.Combine("wwwroot", "upload", requestWiseFile.RequestId.ToString() + Path.GetFileName(SingleFile.FileName));
+                    var filePath = Path.Combine("wwwroot", "upload", Path.GetFileName(SingleFile.FileName));
                     using (FileStream stream = System.IO.File.Create(filePath))
                     {
                         // The file is saved in a buffer before being processed

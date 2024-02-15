@@ -11,16 +11,16 @@ namespace HelloDoc2.Models.ViewModel
             
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please Enter the First Name")]
+        [Required(ErrorMessage = "Please Enter the Last Name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Please Enter the First Name")]
+        [Required(ErrorMessage = "Please Enter the Phone")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Please Enter the First Name")]
+        [Required(ErrorMessage = "Please Enter the Birth Date")]
         public DateTime BirthDate { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Confirm Password")]
+        [Required(ErrorMessage = "Please Enter  Password")]
         public string PasswordHash { get; set; }
 
         [Required(ErrorMessage = "Please Enter Email")]
@@ -45,5 +45,7 @@ namespace HelloDoc2.Models.ViewModel
         public string CreatedDate { get; set; }
 
         public IFormFile? Filepath { get; set; } = null;
+
+        public int Count { get; set; }
     }
 }   

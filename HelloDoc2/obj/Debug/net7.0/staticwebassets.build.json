@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BLUF2Ptf8OKInJ8e6K67qnmYf4nZSDZ/GpVKeCWJ5e8=",
+  "Hash": "rBXRXckGK3jZvP2u5js/Hnl9RVPftUVK0yh59ECJoQE=",
   "Source": "HelloDoc2",
   "BasePath": "_content/HelloDoc2",
   "Mode": "Default",
@@ -4178,12 +4178,12 @@
       "OriginalItemSpec": "wwwroot\\SRS Screen Shorts\\login-banner.png"
     },
     {
-      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\42dashboard-default.svg",
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\check-icon.svg",
       "SourceId": "HelloDoc2",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
       "BasePath": "_content/HelloDoc2",
-      "RelativePath": "upload/42dashboard-default.svg",
+      "RelativePath": "upload/check-icon.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -4194,15 +4194,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload\\42dashboard-default.svg"
+      "OriginalItemSpec": "wwwroot\\upload\\check-icon.svg"
     },
     {
-      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\44check-icon.svg",
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\dashboard-default.svg",
       "SourceId": "HelloDoc2",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
       "BasePath": "_content/HelloDoc2",
-      "RelativePath": "upload/44check-icon.svg",
+      "RelativePath": "upload/dashboard-default.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -4213,15 +4213,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload\\44check-icon.svg"
+      "OriginalItemSpec": "wwwroot\\upload\\dashboard-default.svg"
     },
     {
-      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\45logo.svg",
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig68. View Documents.jpg",
       "SourceId": "HelloDoc2",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
       "BasePath": "_content/HelloDoc2",
-      "RelativePath": "upload/45logo.svg",
+      "RelativePath": "upload/Fig68. View Documents.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -4232,15 +4232,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload\\45logo.svg"
+      "OriginalItemSpec": "wwwroot\\upload\\Fig68. View Documents.jpg"
     },
     {
-      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\46user-default.svg",
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\logo.svg",
       "SourceId": "HelloDoc2",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
       "BasePath": "_content/HelloDoc2",
-      "RelativePath": "upload/46user-default.svg",
+      "RelativePath": "upload/logo.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -4251,7 +4251,64 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload\\46user-default.svg"
+      "OriginalItemSpec": "wwwroot\\upload\\logo.svg"
+    },
+    {
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\success-icon.svg",
+      "SourceId": "HelloDoc2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
+      "BasePath": "_content/HelloDoc2",
+      "RelativePath": "upload/success-icon.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload\\success-icon.svg"
+    },
+    {
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\user-active.svg",
+      "SourceId": "HelloDoc2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
+      "BasePath": "_content/HelloDoc2",
+      "RelativePath": "upload/user-active.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload\\user-active.svg"
+    },
+    {
+      "Identity": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\user-default.svg",
+      "SourceId": "HelloDoc2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\",
+      "BasePath": "_content/HelloDoc2",
+      "RelativePath": "upload/user-default.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload\\user-default.svg"
     }
   ]
 }
