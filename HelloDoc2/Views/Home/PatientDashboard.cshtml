@@ -30,7 +30,7 @@
                             <th scope="col">Documents</th>
                         </tr>
                     </thead>
-                    <tbody>
+@*                     <tbody>
                                @foreach(var item in Model){
                         <tr>
                             <td>@item.CreatedDate</td>
@@ -40,11 +40,30 @@
                             </td>
                         </tr>
                         }
-                    </tbody>
+                    </tbody> *@
+
+                    <tbody>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => Model[i].CreatedDate)</td>
+            <td>@Html.DisplayFor(modelItem => Model[i].Status)</td>
+            <td class="document ">
+                @if (Model[i].Count > 0)
+                {
+                    <a type="button" id="temp" value="Document" class="btn btn-outline-info" asp-route-reqId="@Model[i].Id" asp-action="ViewDocument" asp-controller="Home">(@Model[i].Count) Document</a>
+                }
+                else
+                {
+                    <a type="button" id="temp" value="Document" class="btn btn-outline-info" asp-route-reqId="@Model[i].Id" asp-action="ViewDocument" asp-controller="Home">(@Model[i].Count) Document</a>
+                }
+            </td>
+        </tr>
+    }
+</tbody>
                 </table>
             </div>
             
-
 
                 @foreach (var item in Model)
                 {
@@ -129,7 +148,7 @@
              var selectedValue = $(".btn.active").val();
 
              if (selectedValue == 1) {
-                 window.location.href = "@Url.Action("PatientRequestForm", "Home")";
+                 window.location.href = "@Url.Action("PatientRequestForMe", "Home")";
              } else if (selectedValue == 2) {
                  window.location.href = "@Url.Action("FamilyFriendsForm", "Home")";
              }

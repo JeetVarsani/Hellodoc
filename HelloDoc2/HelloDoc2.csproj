@@ -15,6 +15,7 @@
     <Compile Remove="Views\Home\PatientDashboard.cshtml.cs" />
     <Compile Remove="Views\Home\PatientDashboardProfile.cshtml.cs" />
     <Compile Remove="Views\Home\PatientRequestForm.cshtml.cs" />
+    <Compile Remove="Views\Home\PatientRequestForMe.cs" />
     <Compile Remove="Views\Home\Patient_Login.cshtml.cs" />
     <Compile Remove="Views\Home\Patient_Site.cshtml.cs" />
     <Compile Remove="Views\Home\Submit_Request.cshtml.cs" />

@@ -873,8 +873,32 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\7768657_3763028.jpg",
+      "PackagePath": "staticwebassets\\upload\\7768657_3763028.jpg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig23.Request Support.png",
+      "PackagePath": "staticwebassets\\upload\\Fig23.Request Support.png"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig33. Month wise Scheduling.jpg",
+      "PackagePath": "staticwebassets\\upload\\Fig33. Month wise Scheduling.jpg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig39. Provider Location.jpg",
+      "PackagePath": "staticwebassets\\upload\\Fig39. Provider Location.jpg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig6. Admin dashboard in Active state.jpg",
+      "PackagePath": "staticwebassets\\upload\\Fig6. Admin dashboard in Active state.jpg"
+    },
+    {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig68. View Documents.jpg",
       "PackagePath": "staticwebassets\\upload\\Fig68. View Documents.jpg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\View documents_1.png",
+      "PackagePath": "staticwebassets\\upload\\View documents_1.png"
     },
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\check-icon.svg",
@@ -883,6 +907,10 @@
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\dashboard-default.svg",
       "PackagePath": "staticwebassets\\upload\\dashboard-default.svg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\dashboard_1.png",
+      "PackagePath": "staticwebassets\\upload\\dashboard_1.png"
     },
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\logo.svg",

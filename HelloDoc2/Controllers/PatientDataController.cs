@@ -51,6 +51,7 @@ namespace HelloDoc2.Controllers
                     user.State = model.State;
                     user.ZipCode = model.ZipCode;
                     user.CreatedBy = "1";
+                    user.Mobile = model.Phone;
                     user.CreatedDate = DateTime.Now;
                     user.StrMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(model.BirthDate.Month);
                     user.IntYear = model.BirthDate.Year;

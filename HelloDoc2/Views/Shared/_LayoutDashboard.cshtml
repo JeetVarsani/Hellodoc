@@ -66,10 +66,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active links" aria-current="page" asp-action="PatientDashboard" asp-controller="Home">Dashboard</a>
+                        <a asp-action="PatientDashboard" class="nav-link links @(ViewBag.ActivePage == "PatientDashboard" ? "active" : "")">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link links" asp-action="PatientDashboardProfile" asp-controller="Home">Profile</a>
+                        <a asp-action="PatientDashboardProfile" asp-controller="Home" class="nav-link links @(ViewBag.ActivePage == "PatientDashboardProfile" ? "active" : "")">Profile</a>
                     </li>
                 </ul>
             </div>
@@ -95,13 +95,13 @@
     </script>
     <script>
 
-        var links = document.querySelectorAll('.links');
-        links.forEach(link => {
-            link.addEventListener("click", function () {
-                links.forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
-            })
-        })
+        // var links = document.querySelectorAll('.links');
+        // links.forEach(link => {
+        //     link.addEventListener("click", function () {
+        //         links.forEach(link => link.classList.remove('active'));
+        //         this.classList.add('active');
+        //     })
+        // })
 
     </script>
 </body>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 </head>
-<form asp-action="PatientDashboardProfile" asp-controller="Home" method="post">
+<form asp-action="PatientDashboardProfile" asp-controller="Home" method="post" enctype="multipart/form-data">
 
 
 <div class="profile-main bg-light">
@@ -82,7 +82,7 @@
 
                     <button type="button" id="editBtn" class="btn btn-info text-white EditBtn" onclick="enableFields()">Edit </button>
 
-                    <button type="submit" id="submitBtn" class="btn btn-info text-white EditBtn">Submit </button>
+                    <button type="submit" id="submitBtn" class="btn btn-info text-white EditBtn" asp-controller="Home" asp-action="EditProfile">Submit </button>
 
                     <button type="button" id="cancelBtn" class="btn btn-outline-info EditBtn" onclick="disableFields()">Cancel</button>
 
