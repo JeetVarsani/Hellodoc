@@ -231,3 +231,8 @@ D:\Project\dotnet\HelloDoc2\HelloDoc2\obj\Debug\net7.0\refint\HelloDoc2.dll
 D:\Project\dotnet\HelloDoc2\HelloDoc2\obj\Debug\net7.0\HelloDoc2.pdb
 D:\Project\dotnet\HelloDoc2\HelloDoc2\obj\Debug\net7.0\HelloDoc2.genruntimeconfig.cache
 D:\Project\dotnet\HelloDoc2\HelloDoc2\obj\Debug\net7.0\ref\HelloDoc2.dll
+D:\Project\dotnet\HelloDoc2\HelloDoc2\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+D:\Project\dotnet\HelloDoc2\HelloDoc2\bin\Debug\net7.0\MailKit.dll
+D:\Project\dotnet\HelloDoc2\HelloDoc2\bin\Debug\net7.0\MimeKit.dll
+D:\Project\dotnet\HelloDoc2\HelloDoc2\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+D:\Project\dotnet\HelloDoc2\HelloDoc2\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll

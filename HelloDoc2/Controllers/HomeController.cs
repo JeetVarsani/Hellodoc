@@ -1,10 +1,16 @@
-﻿using HelloDoc2.DataModels;
+﻿using HelloDoc2.Models.ViewModel;
+using HelloDoc2.DataModels;
 using HelloDoc2.Models;
 using HelloDoc2.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Hosting.Internal;
+using MimeKit;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO.Compression;
+using System.Security.Cryptography;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace HelloDoc2.Controllers
 {
@@ -12,7 +18,7 @@ namespace HelloDoc2.Controllers
     {
         private readonly HellodocContext _context;
 
-        public HomeController( HellodocContext context)
+        public HomeController(HellodocContext context)
         {
             _context = context;
         }
@@ -127,24 +133,26 @@ namespace HelloDoc2.Controllers
         }
         public IActionResult Patient_Login(AspNetUser model)
         {
-            
-            var user = _context.AspNetUsers.FirstOrDefault(u => u.Email == model.Email && u.PasswordHash == model.PasswordHash );
+
+            var user = _context.AspNetUsers.FirstOrDefault(u => u.Email == model.Email && u.PasswordHash == model.PasswordHash);
             if (user != null)
             {
                 var userid = _context.Users.FirstOrDefault(u => u.Email == user.Email);
-                HttpContext.Session.SetInt32("userId",userid.UserId);
-                HttpContext.Session.SetString("session1",user.UserName);
-                HttpContext.Session.SetString("email",user.Email);
+                HttpContext.Session.SetInt32("userId", userid.UserId);
+                HttpContext.Session.SetString("session1", user.UserName);
+                HttpContext.Session.SetString("email", user.Email);
+
+                TempData["success"] = "Login Successful";
                 return RedirectToAction("PatientDashboard", "Home");
             }
             else {
-                ModelState.AddModelError(String.Empty,"Invalid email or Password");
+                ModelState.AddModelError(String.Empty, "Invalid email or Password");
                 return View("Patient_Login");
 
             }
-        }   
+        }
 
-        
+
 
         public IActionResult patient_logout()
         {
@@ -197,12 +205,12 @@ namespace HelloDoc2.Controllers
                 BirthDate = date,
 
             };
-
+            TempData["success"] = "Login Successful";
             return View(patientProfile);
         }
 
 
-        
+
 
         public IActionResult EditProfile(PatientProfile model) {
 
@@ -224,25 +232,25 @@ namespace HelloDoc2.Controllers
                     _context.SaveChanges();
 
                 }
-                if (aspnetuser != null) { 
+                if (aspnetuser != null) {
                     aspnetuser.Email = model.Email;
                     _context.SaveChanges();
                 }
             }
 
-            return RedirectToAction("PatientDashboardProfile","Home");        
+            return RedirectToAction("PatientDashboardProfile", "Home");
         }
 
-        public IActionResult ViewDocument(int reqId) 
-        { 
+        public IActionResult ViewDocument(int reqId)
+        {
             ViewBag.userName = HttpContext.Session.GetString("session1");
             HttpContext.Session.SetInt32("RequestId", reqId);
             var requestData = _context.Requests.FirstOrDefault(u => u.RequestId == reqId);
-            ViewBag.reqid = reqId;
             ViewBag.Uploader = requestData.FirstName;
+            ViewBag.reqid = reqId;
             var documents = _context.RequestWiseFiles.Where(u => u.RequestId == reqId).ToList();
             ViewBag.document = documents;
-            return View();  
+            return View();
         }
 
         public IActionResult Download(int documentid)
@@ -253,7 +261,25 @@ namespace HelloDoc2.Controllers
 
         }
 
-        
+        public IActionResult DownloadAll(int reqId)
+        {
+            var filesRow = _context.RequestWiseFiles.Where(x => x.RequestId == reqId).ToList();
+            MemoryStream ms = new MemoryStream();
+            using (ZipArchive zip = new ZipArchive(ms, ZipArchiveMode.Create, true))
+                filesRow.ForEach(file =>
+                {
+                    var path = "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\" + file.FileName;
+                    //var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", file.FileName); 
+                    ZipArchiveEntry zipEntry = zip.CreateEntry(file.FileName);
+                    using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    using (Stream zipEntryStream = zipEntry.Open())
+                    {
+                        fs.CopyTo(zipEntryStream);
+                    }
+                });
+            return File(ms.ToArray(), "application/zip", "download.zip");
+        }
+
 
         [HttpPost]
 
@@ -278,12 +304,261 @@ namespace HelloDoc2.Controllers
 
 
 
-        public IActionResult PatientRequestForMe() 
+        public IActionResult PatientRequestForMe()
+        {
+            return View();
+
+        }
+        public IActionResult PatientRequestForSomeone()
         {
             return View();
 
         }
 
+
+        [HttpPost]
+        public IActionResult PatientRequestForSomeone(PatientRequestForMeAndSomeone model) 
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            Models.Request request = new Models.Request
+            {
+
+                UserId = user.UserId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                CreatedDate = DateTime.Now,
+                Status = 4,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
+
+            RequestWiseFile requestWiseFile = new RequestWiseFile();
+
+
+            RequestClient requestClient = new RequestClient
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+                IntDate = model.BirthDate.Day,
+                IntYear = model.BirthDate.Year,
+                StrMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(model.BirthDate.Month),
+                Street = model.Street,
+                State = model.State,
+                City = model.City,
+                ZipCode = model.ZipCode,
+                RequestId = request.RequestId,
+
+            };
+            _context.RequestClients.Add(requestClient);
+            _context.SaveChanges();
+
+            if (model.Filepath != null)
+            {
+
+                IFormFile SingleFile = model.Filepath;
+                requestWiseFile.RequestId = request.RequestId;
+                requestWiseFile.CreatedDate = DateTime.Now;
+                requestWiseFile.FileName = SingleFile.FileName;
+                _context.Add(requestWiseFile);
+                _context.SaveChanges();
+                var filePath = Path.Combine("wwwroot", "upload", Path.GetFileName(SingleFile.FileName));
+                using (FileStream stream = System.IO.File.Create(filePath))
+                {
+                    // The file is saved in a buffer before being processed
+                    SingleFile.CopyTo(stream);
+                }
+            }
+            return RedirectToAction("PatientDashboard","Home");
+        }
+
+
+        [HttpPost]
+        public IActionResult PatientRequestForMe(PatientRequestForMeAndSomeone model)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            Models.Request request = new Models.Request
+            {
+                UserId = user.UserId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                CreatedDate = DateTime.Now,
+                Status = 4,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
+
+            RequestClient requestClient = new RequestClient
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+                IntDate = model.BirthDate.Day,
+                IntYear = model.BirthDate.Year,
+                StrMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(model.BirthDate.Month),
+                Street = model.Street,
+                State = model.State,
+                City = model.City,
+                ZipCode = model.ZipCode,
+                RequestId = request.RequestId,
+
+            };
+            _context.RequestClients.Add(requestClient);
+            _context.SaveChanges();
+
+            RequestStatusLog requestStatusLog = new RequestStatusLog
+            {
+                RequestId = request.RequestId,
+                Status = request.Status,
+                CreatedDate = DateTime.Now,
+                Notes = model.Comments,
+
+            };
+            _context.RequestStatusLogs.Add(requestStatusLog);
+            _context.SaveChanges();
+
+            RequestWiseFile requestWiseFile = new RequestWiseFile();
+
+            if (model.Filepath != null)
+            {
+
+                IFormFile SingleFile = model.Filepath;
+                requestWiseFile.RequestId = request.RequestId;
+                requestWiseFile.CreatedDate = DateTime.Now;
+                requestWiseFile.FileName = SingleFile.FileName;
+                _context.Add(requestWiseFile);
+                _context.SaveChanges();
+                var filePath = Path.Combine("wwwroot", "upload", Path.GetFileName(SingleFile.FileName));
+                using (FileStream stream = System.IO.File.Create(filePath))
+                {
+                    // The file is saved in a buffer before being processed
+                    SingleFile.CopyTo(stream);
+                }
+            }
+
+            return RedirectToAction("PatientDashboard", "Home");
+
+        }
+
+
+
+        public IActionResult PatientRequestForSomeone1(PatientRequestForMeAndSomeone model)
+        {
+            return RedirectToAction("PatientDashboard", "Home");
+
+        }
+
+
+        public IActionResult ResetPasswordPatient(String code, String email)
+        {
+            ViewBag.Code = code;
+            ViewBag.Email = email;
+            if (code == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ResetPasswordPatient(CreateAccount req)
+        {
+            if (ModelState.IsValid)
+            {
+                var aspnetuser = _context.AspNetUsers.FirstOrDefault(a => a.Email == req.UserName);
+                if (aspnetuser != null)
+                {
+                    if (req.PasswordHash != req.ConfirmPassword)
+                    {
+                        TempData["passerror"] = "Password and Confirmpassword doesn't match";
+                        return View();
+                    }
+
+                    aspnetuser.PasswordHash = req.PasswordHash;
+                    _context.AspNetUsers.Update(aspnetuser);
+                    _context.SaveChanges();
+                    TempData["pwdupdate"] = "Password is updated successfully";
+                    return RedirectToAction("Patient_Login", "Home");
+                }
+                TempData["notvalidemail"] = "You are entered wrong email";
+                return RedirectToAction("ResetPasswordPatient", "Home", new { code = req.Token, email = req.UserName });
+
+            }
+            TempData["passerror"] = "Password and Confirmpassword doesn't match";
+            return RedirectToAction("ResetPasswordPatient", "Home", new { code = req.Token, email = req.UserName });
+
+        }
+
+        public async Task SendEmailAsync(string toEmail, string subject, string body)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("HelloDoc2", "tester49755@gmail.com"));
+            message.To.Add(new MailboxAddress("HelloDoc2 Member", toEmail));
+            message.Subject = subject;
+
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = body;
+
+
+            message.Body = bodyBuilder.ToMessageBody();
+
+            using (var client = new MailKit.Net.Smtp.SmtpClient())
+            {
+                await client.ConnectAsync("smtp.gmail.com", 587, false);
+                await client.AuthenticateAsync("tester49755@gmail.com", "cqrcvgngxahoflnm");
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
+            }
+        }
+
+        private const int TokenExpirationHours = 24;
+
+        public string GenerateToken()
+        {
+            byte[] tokenBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(tokenBytes);
+            }
+
+            string token = Convert.ToBase64String(tokenBytes);
+
+            return token;
+        }
+
+        public DateTime GetTokenExpiration()
+        {
+            return DateTime.UtcNow.AddHours(TokenExpirationHours);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPasswordRequest(CreateAccount req)
+        {
+            if (req.UserName == null)
+            {
+                TempData["emailnotenter"] = "Please Enter Valid Email";
+                return RedirectToAction("Forgot_Password", "Home");
+            }
+
+            var resetToken = GenerateToken();
+            var resetLink = "<a href=" + Url.Action("ResetPasswordPatient", "Home", new { email = req.UserName, code = resetToken }, "https") + ">Reset Password</a>";
+
+            var subject = "Password Reset Request";
+            var body = "<b>Please find the Password Reset Link.</b><br/>" + resetLink;
+
+
+            await SendEmailAsync(req.UserName, subject, body);
+            TempData["emailsend"] = "Email is sent successfully to your email account";
+            return RedirectToAction("Patient_Login", "Home");
+        }
 
 
 

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Serialization;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HelloDoc2.Models.ViewModel
 {
@@ -12,6 +11,8 @@ namespace HelloDoc2.Models.ViewModel
         public string B_LastName { get; set;}
 
         [Required(ErrorMessage = "Please Enter Phone Number")]
+        [StringLength(12, MinimumLength = 8, ErrorMessage = "Phone Number should be between 8 and 12 characters")]
+
         public string B_Phone { get; set;}
 
         [Required(ErrorMessage = "Please Enter Email")]
@@ -37,6 +38,7 @@ namespace HelloDoc2.Models.ViewModel
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please Enter Phone")]
+        [StringLength(12, MinimumLength = 8, ErrorMessage = "Phone Number should be between 8 and 12 characters")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Please Enter Street")]

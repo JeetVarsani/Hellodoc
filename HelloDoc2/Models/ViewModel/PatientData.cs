@@ -15,6 +15,8 @@ namespace HelloDoc2.Models.ViewModel
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please Enter the Phone")]
+        [Range(0.01, 100.00,
+            ErrorMessage = "Price must be between 0.01 and 100.00")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Please Enter the Birth Date")]

@@ -20,7 +20,7 @@ public partial class Request
 
     public string? Email { get; set; }
 
-    public short? Status { get; set; }
+    public short Status { get; set; }
 
     public int? PhysicianId { get; set; }
 
