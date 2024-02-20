@@ -885,6 +885,10 @@
       "PackagePath": "staticwebassets\\upload\\7768657_3763028.jpg"
     },
     {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\7774236_3736765.jpg",
+      "PackagePath": "staticwebassets\\upload\\7774236_3736765.jpg"
+    },
+    {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Acocunt Access_mobile_1.png",
       "PackagePath": "staticwebassets\\upload\\Acocunt Access_mobile_1.png"
     },
@@ -897,8 +901,20 @@
       "PackagePath": "staticwebassets\\upload\\Create Role-Physician_mobile.png"
     },
     {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig19.Send Agreement pop-up.png",
+      "PackagePath": "staticwebassets\\upload\\Fig19.Send Agreement pop-up.png"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig2. Forgot Password.jpg",
+      "PackagePath": "staticwebassets\\upload\\Fig2. Forgot Password.jpg"
+    },
+    {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig23.Request Support.png",
       "PackagePath": "staticwebassets\\upload\\Fig23.Request Support.png"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig3. Admin Dashboard.jpg",
+      "PackagePath": "staticwebassets\\upload\\Fig3. Admin Dashboard.jpg"
     },
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig33. Month wise Scheduling.jpg",
@@ -917,12 +933,24 @@
       "PackagePath": "staticwebassets\\upload\\Fig68. View Documents.jpg"
     },
     {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig7. Admin dashboard in Conclude state.jpg",
+      "PackagePath": "staticwebassets\\upload\\Fig7. Admin dashboard in Conclude state.jpg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Fig8. Admin dashboard in To Close state.jpg",
+      "PackagePath": "staticwebassets\\upload\\Fig8. Admin dashboard in To Close state.jpg"
+    },
+    {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\HelloDoc.xlsx",
       "PackagePath": "staticwebassets\\upload\\HelloDoc.xlsx"
     },
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Jeel_Patel.xlsx",
       "PackagePath": "staticwebassets\\upload\\Jeel_Patel.xlsx"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\Patient site_forget password_mobile.png",
+      "PackagePath": "staticwebassets\\upload\\Patient site_forget password_mobile.png"
     },
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\View documents_1.png",
@@ -933,12 +961,28 @@
       "PackagePath": "staticwebassets\\upload\\check-icon.svg"
     },
     {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\dashboard-active.svg",
+      "PackagePath": "staticwebassets\\upload\\dashboard-active.svg"
+    },
+    {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\dashboard-default.svg",
       "PackagePath": "staticwebassets\\upload\\dashboard-default.svg"
     },
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\dashboard_1.png",
       "PackagePath": "staticwebassets\\upload\\dashboard_1.png"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\downward-arrow.svg",
+      "PackagePath": "staticwebassets\\upload\\downward-arrow.svg"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\index.html",
+      "PackagePath": "staticwebassets\\upload\\index.html"
+    },
+    {
+      "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\inner.css",
+      "PackagePath": "staticwebassets\\upload\\inner.css"
     },
     {
       "Id": "D:\\Project\\dotnet\\HelloDoc2\\HelloDoc2\\wwwroot\\upload\\logo.svg",

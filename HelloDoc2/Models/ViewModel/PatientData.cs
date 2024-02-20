@@ -4,6 +4,7 @@ namespace HelloDoc2.Models.ViewModel
 {
     public class PatientData
     {
+        public List<Request> Requests { get; set; } 
         public string Symptoms { get; set; }
 
         [Required(ErrorMessage = "Please Enter the First Name")]
@@ -15,8 +16,7 @@ namespace HelloDoc2.Models.ViewModel
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please Enter the Phone")]
-        [Range(0.01, 100.00,
-            ErrorMessage = "Price must be between 0.01 and 100.00")]
+        [StringLength(12, MinimumLength = 8, ErrorMessage = "Phone Number should be between 8 and 12 characters")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Please Enter the Birth Date")]

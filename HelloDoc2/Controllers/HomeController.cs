@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using Org.BouncyCastle.Asn1.Ocsp;
+using System.Net;
 
 namespace HelloDoc2.Controllers
 {
@@ -76,10 +77,7 @@ namespace HelloDoc2.Controllers
         public IActionResult PatientDashboard()
         {
 
-            //if (_contextAccessor.HttpContext.Session.GetString("UserId") == null)
-            //{
-            //    return RedirectToAction("LoginPatient", "Home");
-            //}
+
             int? uid = HttpContext.Session.GetInt32("userId");
             //string Username = HttpContext.Session.GetString("Username");
 
@@ -99,8 +97,8 @@ namespace HelloDoc2.Controllers
             List<PatientData> list = new List<PatientData>();
             foreach (var item in applicationDbContext)
             {
+                //ViewBag.reqId = item.RequestId;
                 var count = _context.RequestWiseFiles.Where(o => o.RequestId == item.RequestId).Count();
-
                 var reqwisefile = _context.RequestWiseFiles.FirstOrDefault(x => x.RequestId == item.RequestId);
                 string createddate = item.CreatedDate.ToString();
                 PatientData user = new PatientData();
@@ -229,6 +227,10 @@ namespace HelloDoc2.Controllers
                     existUser.IntDate = model.BirthDate.Day;
                     existUser.Email = model.Email;
                     existUser.Mobile = model.Phone;
+                    existUser.State = model.State;
+                    existUser.ZipCode = model.ZipCode;
+                    existUser.Street = model.Street;
+                    existUser.City = model.City;
                     _context.SaveChanges();
 
                 }
@@ -246,7 +248,7 @@ namespace HelloDoc2.Controllers
             ViewBag.userName = HttpContext.Session.GetString("session1");
             HttpContext.Session.SetInt32("RequestId", reqId);
             var requestData = _context.Requests.FirstOrDefault(u => u.RequestId == reqId);
-            ViewBag.Uploader = requestData.FirstName;
+            ViewBag.Uploader = requestData.FirstName;   
             ViewBag.reqid = reqId;
             var documents = _context.RequestWiseFiles.Where(u => u.RequestId == reqId).ToList();
             ViewBag.document = documents;
@@ -334,7 +336,6 @@ namespace HelloDoc2.Controllers
             _context.Requests.Add(request);
             _context.SaveChanges();
 
-            RequestWiseFile requestWiseFile = new RequestWiseFile();
 
 
             RequestClient requestClient = new RequestClient
@@ -355,6 +356,8 @@ namespace HelloDoc2.Controllers
             };
             _context.RequestClients.Add(requestClient);
             _context.SaveChanges();
+
+            RequestWiseFile requestWiseFile = new RequestWiseFile();
 
             if (model.Filepath != null)
             {
@@ -450,6 +453,56 @@ namespace HelloDoc2.Controllers
 
         public IActionResult PatientRequestForSomeone1(PatientRequestForMeAndSomeone model)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            Models.Request request = new Models.Request
+            {
+                UserId = user.UserId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                CreatedDate = DateTime.Now,
+                Status = 4,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
+
+            RequestClient requestClient = new RequestClient
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+                IntDate = model.BirthDate.Day,
+                IntYear = model.BirthDate.Year,
+                StrMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(model.BirthDate.Month),
+                Street = model.Street,
+                State = model.State,
+                City = model.City,
+                ZipCode = model.ZipCode,
+                RequestId = request.RequestId,
+
+            };
+            _context.RequestClients.Add(requestClient);
+            _context.SaveChanges();
+            RequestWiseFile requestWiseFile = new RequestWiseFile();
+
+            if (model.Filepath != null)
+            {
+
+                IFormFile SingleFile = model.Filepath;
+                requestWiseFile.RequestId = request.RequestId;
+                requestWiseFile.CreatedDate = DateTime.Now;
+                requestWiseFile.FileName = SingleFile.FileName;
+                _context.Add(requestWiseFile);
+                _context.SaveChanges();
+                var filePath = Path.Combine("wwwroot", "upload", Path.GetFileName(SingleFile.FileName));
+                using (FileStream stream = System.IO.File.Create(filePath))
+                {
+                    // The file is saved in a buffer before being processed
+                    SingleFile.CopyTo(stream);
+                }
+            }
             return RedirectToAction("PatientDashboard", "Home");
 
         }
@@ -499,20 +552,20 @@ namespace HelloDoc2.Controllers
         public async Task SendEmailAsync(string toEmail, string subject, string body)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("HelloDoc2", "tester49755@gmail.com"));
+            message.From.Add(new MailboxAddress("HelloDoc2", "testinghere1008@outlook.com"));
             message.To.Add(new MailboxAddress("HelloDoc2 Member", toEmail));
             message.Subject = subject;
 
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = body;
 
-
             message.Body = bodyBuilder.ToMessageBody();
 
             using (var client = new MailKit.Net.Smtp.SmtpClient())
             {
-                await client.ConnectAsync("smtp.gmail.com", 587, false);
-                await client.AuthenticateAsync("tester49755@gmail.com", "cqrcvgngxahoflnm");
+                await client.ConnectAsync("smtp.office365.com", 587, false);
+                //await client.AuthenticateAsync("fakeidofjd00@gmail.com", "gzskmjedfwsnulle");
+                await client.AuthenticateAsync("testinghere1008@outlook.com", "Simple@12345");
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
             }
