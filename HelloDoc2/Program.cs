@@ -1,5 +1,6 @@
-using HelloDoc2.DataContext;
-using HelloDoc2.Models;
+using BLL.Interface;
+using BLL.Repositery;
+using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,10 @@ var provider = builder.Services.BuildServiceProvider();
 //builder.Services.AddDbContext<ApplicationDbContext>();
 var config = provider.GetRequiredService<IConfiguration>();
 builder.Services.AddDbContext<HellodocContext>(item => item.UseNpgsql(config.GetConnectionString("dbcs")));
+builder.Services.AddScoped<ILogin, Login>();
+builder.Services.AddScoped<IPatientRequest, PatientRequest>();
+builder.Services.AddScoped<IPatientDashboard, PatientDashboard>();
+builder.Services.AddScoped<IAdminDashboard, AdminDashboard>();
 builder.Services.AddSession();
 var app = builder.Build();
 

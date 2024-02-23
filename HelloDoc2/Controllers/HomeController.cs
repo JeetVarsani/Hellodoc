@@ -1,7 +1,4 @@
-﻿using HelloDoc2.Models.ViewModel;
-using HelloDoc2.DataModels;
-using HelloDoc2.Models;
-using HelloDoc2.Models.ViewModel;
+﻿using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Hosting.Internal;
@@ -12,21 +9,27 @@ using System.IO.Compression;
 using System.Security.Cryptography;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System.Net;
-
-namespace HelloDoc2.Controllers
+using DAL.ViewModel;
+using BLL.Interface;
+using BLL.Repositery;
+using DAL.Models;
+namespace DAL.Controllers
 {
     public class HomeController : Controller
     {
+        private  IPatientRequest _patientRequest;
         private readonly HellodocContext _context;
-
-        public HomeController(HellodocContext context)
+        private readonly ILogin _login;
+        public HomeController(HellodocContext context, ILogin login, IPatientRequest _PatientRequest, IPatientDashboard patientDashboard)
         {
             _context = context;
+            _login = login;
+            this._patientRequest = _PatientRequest;
         }
 
         public IActionResult Index()
         {
-            var model = new List<HelloDoc2.Models.ViewModel.PatientData>();
+            var model = new List<PatientData>();
             return View();
         }
 
@@ -39,49 +42,15 @@ namespace HelloDoc2.Controllers
         {
             return View();
         }
-        //public IActionResult PatientDashboard()
-        //{
-        //    ViewBag.ActivePage = "PatientDashboard";
-        //    ViewBag.username = HttpContext.Session.GetString("session1");
-        //    string sessionemail = HttpContext.Session.GetString("email");
 
-        //    int userid = _context.Users.FirstOrDefault(x => x.Email == sessionemail).UserId;
-        //    var tabledb = (from r in _context.Requests
-        //                   join rw in _context.RequestWiseFiles
-        //                   on r.RequestId equals rw.RequestId
-        //                   where r.UserId == userid
-        //                   select new
-        //                   {
-        //                       r.RequestId,
-        //                       r.CreatedDate,
-        //                       r.Status,
-        //                       rw.FileName
-        //                   }).ToList();
-        //    List<PatientData> list = new List<PatientData>();
-        //    foreach (var r in tabledb)
-        //    {
-        //        var count = _context.RequestWiseFiles.Where(o => o.RequestId == r.RequestId).Count();
-        //        PatientData patientrequest = new PatientData();
-        //        patientrequest.CreatedDate = r.CreatedDate.ToString();
-        //        patientrequest.Documents = r.FileName;
-        //        patientrequest.Id = r.RequestId;
-        //        patientrequest.Status = r.Status.ToString();
-        //        patientrequest.Count = count; 
-        //        list.Add(patientrequest);
-        //    }
-
-
-        //    return View(list);
-        //}
 
         public IActionResult PatientDashboard()
         {
 
 
             int? uid = HttpContext.Session.GetInt32("userId");
-            //string Username = HttpContext.Session.GetString("Username");
 
-            ViewBag.UserName = HttpContext.Session.GetString("session1");
+            ViewBag.UserName = HttpContext.Session.GetString("username");
             ViewBag.ActivePage = "PatientDashboard";
             var applicationDbContext = (from r in _context.Requests
                                         where r.UserId == uid
@@ -101,6 +70,7 @@ namespace HelloDoc2.Controllers
                 var count = _context.RequestWiseFiles.Where(o => o.RequestId == item.RequestId).Count();
                 var reqwisefile = _context.RequestWiseFiles.FirstOrDefault(x => x.RequestId == item.RequestId);
                 string createddate = item.CreatedDate.ToString();
+                
                 PatientData user = new PatientData();
                 user.CreatedDate = createddate;
                 if (item.Status == 1)
@@ -129,24 +99,28 @@ namespace HelloDoc2.Controllers
             //ViewBag.Username = Username;
             return View(list);
         }
-        public IActionResult Patient_Login(AspNetUser model)
+        public IActionResult Patient_Login(LoginVm loginVm)
         {
 
-            var user = _context.AspNetUsers.FirstOrDefault(u => u.Email == model.Email && u.PasswordHash == model.PasswordHash);
-            if (user != null)
-            {
-                var userid = _context.Users.FirstOrDefault(u => u.Email == user.Email);
-                HttpContext.Session.SetInt32("userId", userid.UserId);
-                HttpContext.Session.SetString("session1", user.UserName);
-                HttpContext.Session.SetString("email", user.Email);
-
-                TempData["success"] = "Login Successful";
-                return RedirectToAction("PatientDashboard", "Home");
+            if (ModelState.IsValid) {
+                if (_login.ValidateLogin(loginVm))
+                {
+                    var user = _context.Users.FirstOrDefault(x => x.Email == loginVm.Email);
+                    HttpContext.Session.SetInt32("userId", user.UserId);
+                    HttpContext.Session.SetString("email", user.Email);
+                    //HttpContext.Session.SetString("session1", user.UserName);
+                    HttpContext.Session.SetString("username", user.FirstName + " " + user.LastName);
+                    TempData["success"] = "Login Success";
+                    return RedirectToAction("PatientDashboard");
+                }
+                else {
+                    TempData["error"] = "Login Failed";
+                    return View();
+                }
             }
-            else {
-                ModelState.AddModelError(String.Empty, "Invalid email or Password");
-                return View("Patient_Login");
-
+            else
+            {
+                return View();
             }
         }
 
@@ -157,6 +131,7 @@ namespace HelloDoc2.Controllers
             HttpContext.Session.Remove("session1");
             return View("Patient_Login");
         }
+
         public IActionResult Submit_Request()
         {
             return View();
@@ -167,18 +142,54 @@ namespace HelloDoc2.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult PatientRequestForm(PatientData model)
+        {
+                _patientRequest.patientRequestForm(model);
+                return RedirectToAction("Index","Home");       
+   
+        }
+
         public IActionResult FamilyFriendsForm()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult FamilyFriendsForm(FamilyData familyData)
+        {
+            _patientRequest.familyRequestForm(familyData);
+            return RedirectToAction("Index","Home");
+        }
+
+
         public IActionResult ConciergeForm()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult ConciergeForm(ConciergeData model)
+        {
+
+            _patientRequest.conciergeRequestForm(model);
+            return RedirectToAction("Index", "Home");
+
+        }
+
         public IActionResult BusinessForm()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult BusinessForm(BusinessData model)
+        {
+            _patientRequest.businessRequestForm(model);
+            return RedirectToAction("Index","Home");
+        }
+
+
 
         public IActionResult PatientDashboardProfile()
         {
@@ -186,7 +197,7 @@ namespace HelloDoc2.Controllers
             int? userID = HttpContext.Session.GetInt32("userId");
             var user = _context.Users.FirstOrDefault(u => u.UserId == userID);
 
-            int intYear = (int)user.IntYear;
+                int intYear = (int)user.IntYear;
             int intDate = (int)user.IntDate;
             string month = (string)user.StrMonth;
             DateTime date = new DateTime(intYear, DateTime.ParseExact(month, "MMM", CultureInfo.InvariantCulture).Month, intDate);
@@ -201,6 +212,7 @@ namespace HelloDoc2.Controllers
                 ZipCode = user.ZipCode,
                 Phone = user.Mobile,
                 BirthDate = date,
+                Address = user.Street + user.City + user.State,
 
             };
             TempData["success"] = "Login Successful";
@@ -301,16 +313,9 @@ namespace HelloDoc2.Controllers
                 SingleFile.CopyTo(stream);
             }
             TempData["Uploadscs"] = "File Uploaded Successfully.Please Refresh Page";
-            return RedirectToAction("ViewDocument", "Home");
-        }
-
-
-
-        public IActionResult PatientRequestForMe()
-        {
             return View();
-
         }
+
         public IActionResult PatientRequestForSomeone()
         {
             return View();
@@ -378,6 +383,33 @@ namespace HelloDoc2.Controllers
             return RedirectToAction("PatientDashboard","Home");
         }
 
+
+
+        public IActionResult PatientRequestForMe()
+        {
+            int? userID = HttpContext.Session.GetInt32("userId");
+            var user = _context.Users.FirstOrDefault(u => u.UserId == userID);
+
+            int intYear = (int)user.IntYear;
+            int intDate = (int)user.IntDate;
+            string month = (string)user.StrMonth;
+            DateTime date = new DateTime(intYear, DateTime.ParseExact(month, "MMM", CultureInfo.InvariantCulture).Month, intDate);
+            PatientRequestForMeAndSomeone patientRequestForMe = new PatientRequestForMeAndSomeone()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Street = user.Street,
+                City = user.City,
+                State = user.State,
+                ZipCode = user.ZipCode,
+                Phone = user.Mobile,
+                BirthDate = date,
+
+            };
+            return View(patientRequestForMe);
+
+        }
 
         [HttpPost]
         public IActionResult PatientRequestForMe(PatientRequestForMeAndSomeone model)
@@ -595,7 +627,8 @@ namespace HelloDoc2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPasswordRequest(CreateAccount req)
         {
-            if (req.UserName == null)
+            var user = _context.AspNetUsers.FirstOrDefault(u => u.Email == req.Email);
+            if (user.UserName == null)
             {
                 TempData["emailnotenter"] = "Please Enter Valid Email";
                 return RedirectToAction("Forgot_Password", "Home");
@@ -620,5 +653,15 @@ namespace HelloDoc2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Route("/Home/PatientRequestForm/checkemailexists/{email}")]
+
+        [HttpGet]
+        public IActionResult checkemailexists(string email)
+        {
+            var emailExists = _context.AspNetUsers.Any(u => u.Email == email);
+            return Json(new { exists = emailExists });
+        }
+
     }
 }

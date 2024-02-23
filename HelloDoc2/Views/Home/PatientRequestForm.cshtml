@@ -1,4 +1,4 @@
-﻿@model HelloDoc2.Models.ViewModel.PatientData;
+﻿@model DAL.ViewModel.PatientData;
 
 
 <head>
@@ -18,7 +18,7 @@
         </a>
         </button>
     </div>
-    <form method="post" asp-action="Index" asp-controller="PatientData" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" asp-action="PatientRequestForm" asp-controller="Home">
     <div class="container-fluid formpart">
         <h2 class="header-text">Patient Information</h2>
         <div class="form-floating input-detail">

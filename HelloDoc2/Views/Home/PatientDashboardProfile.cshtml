@@ -1,4 +1,4 @@
-﻿@model HelloDoc2.Models.ViewModel.PatientProfile;
+﻿@model DAL.ViewModel.PatientProfile;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -69,11 +69,11 @@
                             <input type="text" class="form-control" id="floatingPassword" placeholder="Zip Code" asp-for="ZipCode">
                             <label for="floatingInput" style="margin-left: 1em">Zip Code</label>
                         </div>
-                        <div class="col-md-1 col-sm-12 ">
 
-                            <button type="button" class="btn ms-auto map d-flex mt-2">
-                                <i class="bi bi-geo-alt-fill"></i><Span class=" d-none d-md-block">Map</Span>
-                            </button>
+                        <div class="col-md-1 col-sm-12 ">
+                                <a type="button" class="btn d-flex align-items-center map btn-outline-primary" href="https://www.google.com/maps/search/?api=1&query=@Uri.EscapeDataString(@Model.Address)" target="_blank">
+                                    <i class="bi bi-geo-alt-fill"></i><Span class=" d-none d-md-block">Map</Span>
+                                </a>
                         </div>
                     </div>
                 </div>
