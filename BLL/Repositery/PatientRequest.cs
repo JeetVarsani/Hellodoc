@@ -122,7 +122,9 @@ namespace BLL.Repositery
             }
         }
 
-        public void familyRequestForm(FamilyData familyData) {
+        public void familyRequestForm(FamilyData familyData) 
+        {
+
             Request request = new Request();
 
             RequestClient requestClient = new RequestClient();
@@ -165,6 +167,11 @@ namespace BLL.Repositery
             requestStatusLog.Status = 2;
             _context.RequestStatusLogs.Add(requestStatusLog);
             _context.SaveChanges();
+
+            var email = _context.Users.FirstOrDefault(o => o.Email == familyData.Email);
+            if (email == null) { 
+                
+            }
         }
 
         public void conciergeRequestForm(ConciergeData model) 
@@ -239,6 +246,157 @@ namespace BLL.Repositery
             request.PhoneNumber = model.B_Phone;
             _context.Requests.Add(request);
              _context.SaveChanges();
+        }
+
+
+        public void createRequestForMe(PatientRequestForMeAndSomeone model)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            Request request = new Request
+            {
+                UserId = user.UserId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                CreatedDate = DateTime.Now,
+                Status = 4,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
+
+            RequestClient requestClient = new RequestClient
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+                IntDate = model.BirthDate.Day,
+                IntYear = model.BirthDate.Year,
+                StrMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(model.BirthDate.Month),
+                Street = model.Street,
+                State = model.State,
+                City = model.City,
+                ZipCode = model.ZipCode,
+                RequestId = request.RequestId,
+
+            };
+            _context.RequestClients.Add(requestClient);
+            _context.SaveChanges();
+
+            RequestStatusLog requestStatusLog = new RequestStatusLog
+            {
+                RequestId = request.RequestId,
+                Status = request.Status,
+                CreatedDate = DateTime.Now,
+                Notes = model.Comments,
+
+            };
+            _context.RequestStatusLogs.Add(requestStatusLog);
+            _context.SaveChanges();
+
+            RequestWiseFile requestWiseFile = new RequestWiseFile();
+
+            if (model.Filepath != null)
+            {
+
+                IFormFile SingleFile = model.Filepath;
+                requestWiseFile.RequestId = request.RequestId;
+                requestWiseFile.CreatedDate = DateTime.Now;
+                requestWiseFile.FileName = SingleFile.FileName;
+                _context.Add(requestWiseFile);
+                _context.SaveChanges();
+                var filePath = Path.Combine("wwwroot", "upload", Path.GetFileName(SingleFile.FileName));
+                using (FileStream stream = System.IO.File.Create(filePath))
+                {
+                    // The file is saved in a buffer before being processed
+                    SingleFile.CopyTo(stream);
+                }
+            }
+        }
+
+        public PatientRequestForMeAndSomeone PatientRequestForMe(int? userID)
+        {
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == userID);
+
+            int intYear = (int)user.IntYear;
+            int intDate = (int)user.IntDate;
+            string month = (string)user.StrMonth;
+            DateTime date = new DateTime(intYear, DateTime.ParseExact(month, "MMM", CultureInfo.InvariantCulture).Month, intDate);
+            PatientRequestForMeAndSomeone patientRequestForMe = new PatientRequestForMeAndSomeone()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Street = user.Street,
+                City = user.City,
+                State = user.State,
+                ZipCode = user.ZipCode,
+                Phone = user.Mobile,
+                BirthDate = date,
+
+            };
+            return patientRequestForMe;
+        }
+
+
+        public void createRequestForSomeone(PatientRequestForMeAndSomeone model)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            Request request = new Request
+            {
+
+                UserId = user.UserId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                CreatedDate = DateTime.Now,
+                Status = 4,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+            };
+            _context.Requests.Add(request);
+            _context.SaveChanges();
+
+
+
+            RequestClient requestClient = new RequestClient
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.Phone,
+                Email = model.Email,
+                IntDate = model.BirthDate.Day,
+                IntYear = model.BirthDate.Year,
+                StrMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(model.BirthDate.Month),
+                Street = model.Street,
+                State = model.State,
+                City = model.City,
+                ZipCode = model.ZipCode,
+                RequestId = request.RequestId,
+
+            };
+            _context.RequestClients.Add(requestClient);
+            _context.SaveChanges();
+
+            RequestWiseFile requestWiseFile = new RequestWiseFile();
+
+            if (model.Filepath != null)
+            {
+
+                IFormFile SingleFile = model.Filepath;
+                requestWiseFile.RequestId = request.RequestId;
+                requestWiseFile.CreatedDate = DateTime.Now;
+                requestWiseFile.FileName = SingleFile.FileName;
+                _context.Add(requestWiseFile);
+                _context.SaveChanges();
+                var filePath = Path.Combine("wwwroot", "upload", Path.GetFileName(SingleFile.FileName));
+                using (FileStream stream = System.IO.File.Create(filePath))
+                {
+                    // The file is saved in a buffer before being processed
+                    SingleFile.CopyTo(stream);
+                }
+            }
         }
     }
 }

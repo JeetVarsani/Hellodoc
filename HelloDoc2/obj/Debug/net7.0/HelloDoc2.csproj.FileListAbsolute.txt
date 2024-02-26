@@ -449,6 +449,10 @@ D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.D
 D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
 D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\BLL.dll
+D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\DAL.dll
+D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\BLL.pdb
+D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\DAL.pdb
 D:\my copy\HelloDoc2\HelloDoc2\obj\Debug\net7.0\HelloDoc2.csproj.AssemblyReference.cache
 D:\my copy\HelloDoc2\HelloDoc2\obj\Debug\net7.0\HelloDoc2.GeneratedMSBuildEditorConfig.editorconfig
 D:\my copy\HelloDoc2\HelloDoc2\obj\Debug\net7.0\HelloDoc2.AssemblyInfoInputs.cache
@@ -474,7 +478,3 @@ D:\my copy\HelloDoc2\HelloDoc2\obj\Debug\net7.0\refint\HelloDoc2.dll
 D:\my copy\HelloDoc2\HelloDoc2\obj\Debug\net7.0\HelloDoc2.pdb
 D:\my copy\HelloDoc2\HelloDoc2\obj\Debug\net7.0\HelloDoc2.genruntimeconfig.cache
 D:\my copy\HelloDoc2\HelloDoc2\obj\Debug\net7.0\ref\HelloDoc2.dll
-D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\BLL.dll
-D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\DAL.dll
-D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\BLL.pdb
-D:\my copy\HelloDoc2\HelloDoc2\bin\Debug\net7.0\DAL.pdb

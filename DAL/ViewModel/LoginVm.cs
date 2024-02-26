@@ -9,6 +9,7 @@ namespace DAL.ViewModel
     public class LoginVm
     {
         public string PasswordHash { get; set; }
+        //public string PasswordConfirm {  get; set; }
 
         public string Email { get; set; }
     }

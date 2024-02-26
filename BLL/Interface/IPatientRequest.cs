@@ -17,5 +17,11 @@ namespace BLL.Interface
         void conciergeRequestForm(ConciergeData model);
 
         void businessRequestForm(BusinessData model);
+
+        void createRequestForMe(PatientRequestForMeAndSomeone model);
+
+        PatientRequestForMeAndSomeone PatientRequestForMe(int? userID);
+
+        void createRequestForSomeone(PatientRequestForMeAndSomeone model);
     }
 }

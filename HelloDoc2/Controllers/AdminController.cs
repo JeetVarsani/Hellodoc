@@ -46,5 +46,32 @@ namespace DAL.Controllers
             };
             return PartialView("_RequestsAccToStatus",adminDashboardViewModel);
         }
+
+        public IActionResult AdminMyProfile() { 
+            return View(); 
+        }
+
+        public IActionResult CloseCase() {
+            return View();
+        }
+        public IActionResult Orders()
+        {
+            return View();
+        }
+        public IActionResult Transfer()
+        {
+            return View();
+        }
+        public IActionResult ViewCase()
+        {
+            return View();
+        }
+        public IActionResult ViewNotes()
+        {
+            return View();
+        }
+        public IActionResult ViewUploads() {
+            return View();
+        }
     }
 }

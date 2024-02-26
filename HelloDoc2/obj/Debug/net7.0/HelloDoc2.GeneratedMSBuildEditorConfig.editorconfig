@@ -22,12 +22,44 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5EYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Admin/AdminMyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5NeVByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Admin/CloseCase.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2xvc2VDYXNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Admin/Orders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cT3JkZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Admin/Transfer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVHJhbnNmZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Admin/ViewCase.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld0Nhc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Admin/ViewNotes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld05vdGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Admin/ViewUploads.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld1VwbG9hZHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/my copy/HelloDoc2/HelloDoc2/Views/Home/BusinessForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCdXNpbmVzc0Zvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/my copy/HelloDoc2/HelloDoc2/Views/Home/ConciergeForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb25jaWVyZ2VGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/my copy/HelloDoc2/HelloDoc2/Views/Home/CreateAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcmVhdGVBY2NvdW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/my copy/HelloDoc2/HelloDoc2/Views/Home/FamilyFriendsForm.cshtml]

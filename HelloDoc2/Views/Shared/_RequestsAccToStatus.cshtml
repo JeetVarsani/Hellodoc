@@ -1,9 +1,7 @@
 ﻿@model DAL.ViewModel.AdminDashboardViewModel
 
-<head>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
 
 
 <div class="d-flex justify-content-between align-items-center">
@@ -23,7 +21,7 @@
             </span>
         </button>
         <button type="button" class="btn btn-info d-flex ms-1 ms-sm-2 p-1 p-sm-2 align-items-center text-light">
-            <i class="bi bi-arrow-up-right me-md-1"></i></i><span class="d-md-block d-none px-2 ">Export</span>
+            <i class="bi bi-arrow-up-right me-md-1"></i><span class="d-md-block d-none px-2 ">Export</span>
         </button>
         <button type="button" class="btn btn-info d-flex ms-1 ms-sm-2 p-1 p-sm-2 align-items-center text-light">
             <i class="bi bi-box-arrow-up-right me-md-1"></i><span class="d-md-block d-none px-2 ">
@@ -47,7 +45,7 @@
         <div class="d-md-flex gap-1">
             <form role="search" class="mb-2" >
                 <!-- <i class="bi bi-search"></i> -->
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="my-search-input">
             </form>
             <!-- Example split danger button -->
 
@@ -89,7 +87,7 @@
 
 
     <div class="table-responsive d-none d-sm-block">
-            <table class="table" id="SearchData">
+            <table class="table" id="New">
             <thead>
                     <tr>
                     <th scope="col">Name</th>
@@ -164,21 +162,117 @@
                         <td>@obj.Notes</td>  
                         }
 
-                        <td>
-                            <button class="btn btn-outline-Primary d-none d-md-block">Provider</button>
+                        <td class="d-flex dropdown">
+                                @if (Model.requestListAdminDash.Any(x => x.Status == 2 || x.Status == 3 || x.Status == 4 || x.Status == 5 || x.Status == 6))
+                                {
+                                    <button class="btn btn-outline-primary me-2 text-white border-white">Patient</button>
+                                }
+                                <button class="btn btn-outline-primary ms-2 text-white border-white d-none d-md-block">Provider</button>
 
                         </td>
-                        <td><button class="btn btn-outline-secondary d-none d-md-block">Actions</button></td>
+                            <td class="dropdown">
+                                <button class="btn btn-outline-primary text-white border-white d-none d-md-block" data-bs-toggle="dropdown">Actions</button>
+                                <ul class="dropdown-menu">
+                                    @if (Model.requestListAdminDash.Any(x => x.Status == 1))
+                                    {
+                                        <li><a class="dropdown-item" href="#">Asign Case</a></li>
+                                    }
+                                    @if (Model.requestListAdminDash.Any(x => x.Status == 1))
+                                    {
+                                        <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Cancel Case</button></li>
+                                    }
+
+                                    <li><a class="dropdown-item" asp-action="ViewCase" asp-controller="Admin">View Case</a></li>
+
+                                    @if(Model.requestListAdminDash.Any(x => x.Status == 2 || x.Status == 3 || x.Status == 4 || x.Status == 5 || x.Status ==6))
+                                    {
+                                        <li><a class="dropdown-item" asp-action="ViewUploads" asp-controller="Admin">View Uploads</a></li>
+                                    }
+                                    <li><a class="dropdown-item" asp-action="ViewNotes" asp-controller="Admin">View Notes</a></li>
+                                    @if(Model.requestListAdminDash.Any(x => x.Status == 3 || x.Status == 4 || x.Status == 5 ))
+                                    {
+                                        <li><a class="dropdown-item" asp-action="Orders" asp-controller="Admin">Orders</a></li>
+                                    }
+                                    @if (Model.requestListAdminDash.Any(x => x.Status == 3 || x.Status == 4 || x.Status == 5))
+                                    {
+                                        <li><a class="dropdown-item" href="#">Doctors Notes</a></li>
+                                    }
+                                    @if(Model.requestListAdminDash.Any(x => x.Status == 5))
+                                    {
+                                        <li><a class="dropdown-item" href="#">Close Case</a></li>
+                                    }
+                                    @if(Model.requestListAdminDash.Any(x => x.Status == 2))
+                                    {
+                                        <li><a class="dropdown-item" asp-action="Transfer" asp-controller="Admin">Transfer</a></li>
+                                    }
+                                    @if (Model.requestListAdminDash.Any(x => x.Status == 2 || x.Status == 5))
+                                    {
+                                        <li><a class="dropdown-item" href="#">Clear Case</a></li>
+                                    }
+                                    @if (Model.requestListAdminDash.Any(x => x.Status == 2))
+                                    {
+                                        <li><a class="dropdown-item" href="#">Send Agreement</a></li>
+                                    }
+                                    @if (Model.requestListAdminDash.Any(x => x.Status == 1))
+                                    {
+                                        <li><a class="dropdown-item" href="#">Block Patient</a></li>
+                                    }
+                                    @if (Model.requestListAdminDash.Any(x => x.Status == 3 || x.Status == 4 || x.Status == 5))
+                                    {
+                                    <li><a class="dropdown-item" href="#">Encounter</a></li>
+                                    }
+                                </ul>
+                            </td>
                 </tr>
             }
-            
         </tbody>
     </table>
 </div>
 
 }
 
-<script>
+@* all pop up models are here  *@
+@* --------------------------------------this is cancel case popup---------------------------------- *@
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"> Confirm Cancellation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div id="ptn_name">
+                            Patient Name :
+                            <span id="testtest">
+                                test, test
+                            </span>
+                        </div>
+                        <div>
+                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option selected>Reason for Cancellation</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                      style="height: 100px"></textarea>
+                            <label for="floatingTextarea2" class="text_area_placeholder">Provider Aditional Notes</label>
+                        </div>
+                        <div id="pop_buttons_container">
+                            <button type="submit" id="pop_submit">Confirm</button>
+                            <button type="submit" id="pop_cancle">Cancle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@* <script>
     $(document).ready(function () {
         $("#searchInput").on("input", function () {
             var value = $(this).val().toLowerCase();
@@ -187,4 +281,37 @@
            });
        });
     });
-</script>
+</script> *@
+
+
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#New').DataTable({
+                "initComplete": function (settings, json) {
+
+                    $('#my-search-input').val(settings.oPreviousSearch.sSearch);
+
+                    $('#my-search-input').on('keyup', function () {
+                        var searchValue = $(this).val();
+                        settings.oPreviousSearch.sSearch = searchValue;
+                        settings.oApi._fnReDraw(settings);
+                    });
+                },
+                "lengthMenu": [[5, 10, -1], [5, 10, "All"]],
+                "pageLength": 5,
+                language: {
+                    oPaginate: {
+                        sNext: '<i class="bi bi-caret-right-fill text-info"></i>',
+                        sPrevious: '<i class="bi bi-caret-left-fill text-info"></i>'
+
+                    }
+                }
+            });
+            // $('.dataTables_length').hide();
+            $('.dataTables_filter').hide();
+        });
+
+    </script>
+
