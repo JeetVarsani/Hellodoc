@@ -19,6 +19,17 @@ namespace DAL.Controllers
         public IActionResult AdminDashboard(int Status, string reqtypeid, int RegionId)
         {
 
+            var request = _context.Requests;
+
+            var reqCount = request.GroupBy(o => o.Status).Select(h => new { Status = h.Key, Count = h.Count() }).ToList();
+
+            ViewBag.newRequest = reqCount.Find(o => o.Status == 1) ?.Count ?? 0;
+            ViewBag.pendingRequest = reqCount.Find(i => i.Status ==2)?.Count ?? 0; 
+            ViewBag.activeRequest = reqCount.Find(i => i.Status == 3)?.Count ?? 0;
+            ViewBag.concludeRequest = reqCount.Find(i => i.Status == 4)?.Count ?? 0;
+            ViewBag.toCloseRequest = reqCount.Find(i => i.Status == 5)?.Count ?? 0;
+            ViewBag.unpaidRequest = reqCount.Find(i => i.Status == 6)?.Count ?? 0;
+
             var requestAdmin=_adminDashboard.requestDataAdmin(1,null, 0);
             AdminDashboardViewModel adminDashboardViewModel = new AdminDashboardViewModel()
             {
@@ -62,13 +73,24 @@ namespace DAL.Controllers
         {
             return View();
         }
-        public IActionResult ViewCase()
+        public IActionResult ViewCase(int requestId)
         {
-            return View();
+            AdminDashboardViewModel adminDashboardViewModel = new AdminDashboardViewModel();
+            adminDashboardViewModel.requestListAdminDash = _adminDashboard.ViewCase(requestId);
+            return View(adminDashboardViewModel);
         }
-        public IActionResult ViewNotes()
+        public IActionResult ViewNotes(int requestId)
         {
-            return View();
+            _adminDashboard.ViewNotes(requestId);
+            return View(_adminDashboard.ViewNotes(requestId));
+        }
+
+
+        [HttpPost]
+        public IActionResult ViewNotes(ViewNotesVm model, int requestId) {
+             _adminDashboard.editViewNotes(model, requestId);
+            model = _adminDashboard.ViewNotes(requestId);
+            return View(model) ;
         }
         public IActionResult ViewUploads() {
             return View();

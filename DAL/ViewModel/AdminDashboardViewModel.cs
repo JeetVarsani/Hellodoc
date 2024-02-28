@@ -24,9 +24,15 @@ namespace DAL.ViewModel
 
     public class RequestListAdminDash
     {
+        public int RequestId { get; set; }
+        public string FirstName { get; set; }   
+        public string LastName { get; set; }
+
         public string Name { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public string Email { get; set; }
+
+        public DateTime? DateOfBirth { get; set; }
 
 
         public string Requestor { get; set; }

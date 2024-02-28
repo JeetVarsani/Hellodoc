@@ -10,5 +10,11 @@ namespace BLL.Interface
     public interface IAdminDashboard
     {
         List<RequestListAdminDash> requestDataAdmin(int Status, string reqTypeId, int RegionId );
+
+        List<RequestListAdminDash> ViewCase(int requestId);
+
+        ViewNotesVm ViewNotes(int requestId);
+
+        void editViewNotes(ViewNotesVm model, int requestId);
     }
 }
