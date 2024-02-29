@@ -11,6 +11,8 @@ namespace DAL.ViewModel
     {
         public List<RequestListAdminDash> requestListAdminDash { get; set; }
 
+        public List<CloseCase> closeCases { get; set; }
+
         public RequestListAdminDash? adminDash { get; set; }
 
         public Request requestData { get; set; }
@@ -20,11 +22,18 @@ namespace DAL.ViewModel
         public int Regin_Short {get; set;}
 
         public string reqTypId { get; set; }
+
+        public List<CaseTag> CaseTagList { get; set; }
+        //have to change this field in another model
+
+        public string Notes {  get; set; }
+        public string CaseTags { get; set; }
     }
 
     public class RequestListAdminDash
     {
         public int RequestId { get; set; }
+
         public string FirstName { get; set; }   
         public string LastName { get; set; }
 
@@ -66,4 +75,18 @@ namespace DAL.ViewModel
         public int RequestTypeId { get; set; }
         public string rPhonenumber { get; set; }
     }
+
+    public class CloseCase
+    {
+        public int RequestId { get; set; }
+
+        public short Status { get; set; }
+
+        public string? Notes { get; set; }
+
+        public string? Name { get; set; }
+
+        public string? CaseTag { get; set; }
+    }
+
 }

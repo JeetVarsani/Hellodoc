@@ -16,5 +16,7 @@ namespace BLL.Interface
         ViewNotesVm ViewNotes(int requestId);
 
         void editViewNotes(ViewNotesVm model, int requestId);
+
+        void cancelCase(AdminDashboardViewModel model, int requestId);
     }
 }

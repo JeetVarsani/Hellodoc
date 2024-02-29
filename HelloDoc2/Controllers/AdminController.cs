@@ -81,8 +81,8 @@ namespace DAL.Controllers
         }
         public IActionResult ViewNotes(int requestId)
         {
-            _adminDashboard.ViewNotes(requestId);
-            return View(_adminDashboard.ViewNotes(requestId));
+            var akshay = _adminDashboard.ViewNotes(requestId);
+            return View(akshay);
         }
 
 
@@ -92,8 +92,17 @@ namespace DAL.Controllers
             model = _adminDashboard.ViewNotes(requestId);
             return View(model) ;
         }
+
+
         public IActionResult ViewUploads() {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult CancelCase(AdminDashboardViewModel model, int requestId)
+        {
+            _adminDashboard.cancelCase(model, requestId);
+            return RedirectToAction("AdminDashboard","Admin");
         }
     }
 }

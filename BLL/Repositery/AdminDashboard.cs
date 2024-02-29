@@ -23,6 +23,7 @@ namespace BLL.Repositery
         {
             //var requestTypeId = _context.Requests.Where(o => o.RequestTypeId == reqTypeId);
             var requestList = _context.Requests.Where(o => o.Status == Status);
+            List<CaseTag> caseTag = new List<CaseTag>();
 
             if (reqTypeId != null)
             {
@@ -36,6 +37,8 @@ namespace BLL.Repositery
             }
             var GetRequestData = requestList.Select(r => new RequestListAdminDash() {
 
+                FirstName = r.RequestClients.Select(x => x.FirstName).First(),
+                LastName = r.RequestClients.Select(x => x.LastName).First(),
                 RequestId = r.RequestId,
                 Name = r.RequestClients.Select(x => x.FirstName).First() + " " + r.RequestClients.Select(x => x.LastName).First(),
                 Requestor = r.FirstName + " " + r.LastName,
@@ -56,7 +59,7 @@ namespace BLL.Repositery
 
             }).ToList();  
             return GetRequestData;
-        }
+        }   
 
         public List<RequestListAdminDash> ViewCase(int requestId)
         {
@@ -97,7 +100,6 @@ namespace BLL.Repositery
         public ViewNotesVm ViewNotes(int requestId)
         {
             
-
             var user = _context.RequestNotes.FirstOrDefault(u => u.RequestId == requestId);
             var usertwo = _context.RequestStatusLogs.FirstOrDefault(x => x.RequestId == requestId);
 
@@ -155,12 +157,27 @@ namespace BLL.Repositery
                 reqnotes.AdminNotes = model.AdminNotes;
                 reqnotes.PhysicianNotes = model.PhysicianNotes;
                 reqnotes.ModifiedBy = (int)_context.Users.FirstOrDefault(x => x.UserId == req.UserId).AspNetUserId;
-                //reqnotes.ModifiedBy = _context.Requests.Where(x => x.RequestId == model.RequestId).Select(x => x.User.AspNetUserId).First();
                 reqnotes.ModifiedDate = DateTime.Now;
                 _context.SaveChanges();
-            }
-            
+            }  
 
+        }
+
+        public void cancelCase(AdminDashboardViewModel model,int requestId)
+        {
+
+            RequestStatusLog requestStatuslog = new RequestStatusLog();
+            requestStatuslog.RequestId = requestId;
+            requestStatuslog.Status = 5;
+            requestStatuslog.Notes = model.Notes;
+            _context.Add(requestStatuslog);
+            _context.SaveChanges();
+            
+            var cancel = _context.Requests.FirstOrDefault(x => x.RequestId == requestId);
+            cancel.Status = 5;
+            cancel.CaseTag = model.CaseTags;
+
+            _context.SaveChanges();
         }
     }
 }
