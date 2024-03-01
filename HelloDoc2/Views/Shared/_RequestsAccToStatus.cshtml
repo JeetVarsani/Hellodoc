@@ -1,5 +1,5 @@
 ﻿@model DAL.ViewModel.AdminDashboardViewModel
-@using static DAL.ViewModel.ViewNotesVm;
+
 
 <head>
 
@@ -177,11 +177,11 @@
                                 <ul class="dropdown-menu">
                                     @if (Model.requestListAdminDash.Any(x => x.Status == 1))
                                     {
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModalAssign">Asign Case</a></li>
+                                        <li><a class="dropdown-item" onclick="asigncase(@obj.RequestId)">Asign Case</a></li>
                                     }
                                     @if (Model.requestListAdminDash.Any(x => x.Status == 1))
                                     {
-                                        <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="cancelcase(@obj.RequestId,'@obj.Name')">Cancel Case</button></li>
+                                        <li><button class="dropdown-item" onclick="cancelcase(@obj.RequestId)">Cancel Case</button></li>
                                     }
 
                                     <li><button class="dropdown-item" onclick="location.href='@Url.Action("ViewCase","Admin", new {requestId = @obj.RequestId})'">View Case</button></li>
@@ -305,55 +305,72 @@
 @* -------------------------pagination end------------------ *@
 
 
+@* -------------- this is cancel case popup div ------------------ *@
+<div id="contentCancelNote">
 
-@* ----------------cancel case pop up model---------------------------- *@
+</div>
+@* ------------------cancel case pop up end---------------------- *@
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel"> Confirm Cancellation</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form asp-action="CancelCase" asp-controller="Admin" method="post">
-                    <input hidden id="requestid" name="requestid" value="" />
-                    <div >
-                        Patient Name : <span id="Fullname" value =""></span>
-                    </div>
-                    <div>
-                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" asp-for="CaseTags">
-                            <option hidden>Reason For cancellation</option>
-                            <option>No Respone to call or text, left message</option>
-                            <option>Cost Issue</option>
-                            <option>Insurance Issue</option>
-                            <option>Out of Service Area</option>
-                            <option>Not appropriate for service</option>
-                            <option>Referral to Clinic or Hospital</option>
-                        </select>
-                    </div>
-                    <div class="form-floating">
-
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                                  style="height: 100px" asp-for="Notes"></textarea>
-                        <label for="floatingTextarea2" class="text_area_placeholder">Provider Aditional Notes</label>
-                    </div>
-                    <div id="pop_buttons_container">
-                        <button type="submit" id="pop_submit">Confirm</button>
-                        <button id="pop_cancle">Cancle</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<div id="contentAsignNote">
 </div>
 
-@* ------------------cancel case pop up end---------------------- *@
-<script>
-    function cancelcase(RequestId, Name) {
 
-        $('#requestid').val(RequestId);
-        $('#Fullname').text(Name);
+<script>
+    // function cancelcase(RequestId, Name) {
+
+    //     $('#requestid').val(RequestId);
+    //     $('#Fullname').text(Name);
+
+    //     $.get('/Admin/CancelCase', function (data) {
+    //         // Handle the response data here
+    //         console.log('GET method called successfully!');
+    //     });
+    // }
+
+
+    function cancelcase(reqid) {
+
+        console.log("CLicked")
+
+        let action = "/Admin" + "/" + "CancelCase"
+        event.preventDefault();
+        $.ajax({
+            url: action,
+            type: 'GET',
+            data: { req: reqid },
+            success: function (result) {
+                console.log(result)
+                $('#contentCancelNote').html(result);
+                $('#newRequestModal').modal('show');
+
+            },
+            error: function () {
+                alert('Error loading partial view');
+            }
+        });
+    }
+
+
+    function asigncase(reqid) {
+
+        console.log("CLicked")
+
+        let action = "/Admin" + "/" + "AsignCase"
+        event.preventDefault();
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: { req: reqid },
+            success: function (result) {
+                console.log(result)
+                $('#contentAsignNote').html(result);
+                $('#myModalAssign').modal('show');
+
+            },
+            error: function () {
+                alert('Error loading partial view');
+            }
+        });
     }
 
 </script>
@@ -361,7 +378,7 @@
 
 @* assign case pop up *@
 
-
 @*ASSIGN CASE MODAL - 3*@
+
 
 @* asign case pop up end *@

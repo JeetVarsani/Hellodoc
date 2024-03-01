@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\BLL",
+    "\\BLL\\Repositery",
+    "\\DAL",
+    "\\HelloDoc2",
+    "\\HelloDoc2\\Views",
+    "\\HelloDoc2\\Views\\Admin",
+    "\\HelloDoc2\\Views\\Home",
+    "\\HelloDoc2\\Views\\Patient"
+  ],
+  "SelectedNode": "\\HelloDoc2\\Views\\Home\\PatientRequestForMe.cs",
+  "PreviewInSolutionExplorer": false
+}

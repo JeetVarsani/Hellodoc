@@ -37,8 +37,6 @@ namespace DAL.Controllers
                 StatusForName = Status,
                 reqTypId = reqtypeid,
                 Regin_Short = RegionId
-
-                
             };
             return View(adminDashboardViewModel);
         }
@@ -98,11 +96,35 @@ namespace DAL.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult CancelCase(AdminDashboardViewModel model, int requestId)
+        public IActionResult CancelCase(int req)
         {
-            _adminDashboard.cancelCase(model, requestId);
+            HttpContext.Session.SetInt32("reqId", req);
+            AdminDashboardViewModel adminDashboardViewModel=new AdminDashboardViewModel();
+            adminDashboardViewModel.CaseTags = _adminDashboard.cancelCaseMain();
+            return PartialView("_adminCancelCase", adminDashboardViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult CancelCase(AdminDashboardViewModel model)
+        {
+            int? req = HttpContext.Session.GetInt32("reqId");
+            _adminDashboard.cancelCase(model, req??0);
             return RedirectToAction("AdminDashboard","Admin");
+        }
+
+
+        public IActionResult AsignCase(int req)
+        {
+            AdminAsignVm adminAsignVm = new AdminAsignVm();
+            adminAsignVm.regions = _adminDashboard.asignCase();
+            return PartialView("_adminAsignCase",adminAsignVm);
+        }
+
+        public IActionResult GetPhysiciansByRegionId(int regionId)
+        {
+            AdminAsignVm adminAsignVm=new AdminAsignVm();
+            adminAsignVm.physicianList =  _adminDashboard.asignPhysician(regionId);
+            return Json(new { adminAsignVm });
         }
     }
 }

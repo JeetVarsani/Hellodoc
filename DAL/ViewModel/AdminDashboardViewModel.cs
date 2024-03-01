@@ -9,9 +9,12 @@ namespace DAL.ViewModel
 {
     public class AdminDashboardViewModel
     {
-        public List<RequestListAdminDash> requestListAdminDash { get; set; }
 
-        public List<CloseCase> closeCases { get; set; }
+        public AdminDashboardViewModel()
+        {
+            CaseTags = new List<CaseTag>();
+        }
+        public List<RequestListAdminDash> requestListAdminDash { get; set; }
 
         public RequestListAdminDash? adminDash { get; set; }
 
@@ -23,11 +26,10 @@ namespace DAL.ViewModel
 
         public string reqTypId { get; set; }
 
-        public List<CaseTag> CaseTagList { get; set; }
-        //have to change this field in another model
+        public List<CaseTag> CaseTags { get; set; }
 
         public string Notes {  get; set; }
-        public string CaseTags { get; set; }
+        public string CaseTagss { get; set; }
     }
 
     public class RequestListAdminDash
@@ -76,17 +78,10 @@ namespace DAL.ViewModel
         public string rPhonenumber { get; set; }
     }
 
-    public class CloseCase
+    public class CaseTag
     {
-        public int RequestId { get; set; }
-
-        public short Status { get; set; }
-
-        public string? Notes { get; set; }
-
-        public string? Name { get; set; }
-
-        public string? CaseTag { get; set; }
+        public int CaseTagId { get; set; }
+        public string Name { get; set; }
     }
 
 }

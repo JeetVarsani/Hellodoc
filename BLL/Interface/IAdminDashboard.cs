@@ -1,4 +1,5 @@
-﻿using DAL.ViewModel;
+﻿using DAL.Models;
+using DAL.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,11 @@ namespace BLL.Interface
         void editViewNotes(ViewNotesVm model, int requestId);
 
         void cancelCase(AdminDashboardViewModel model, int requestId);
+
+        List<DAL.ViewModel.CaseTag> cancelCaseMain();
+
+        List<Region> asignCase();
+
+        List<Physician> asignPhysician(int regionId);
     }
 }

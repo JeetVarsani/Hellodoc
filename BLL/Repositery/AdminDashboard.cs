@@ -23,7 +23,7 @@ namespace BLL.Repositery
         {
             //var requestTypeId = _context.Requests.Where(o => o.RequestTypeId == reqTypeId);
             var requestList = _context.Requests.Where(o => o.Status == Status);
-            List<CaseTag> caseTag = new List<CaseTag>();
+            List<DAL.ViewModel.CaseTag> caseTag = new List<DAL.ViewModel.CaseTag>();
 
             if (reqTypeId != null)
             {
@@ -163,21 +163,49 @@ namespace BLL.Repositery
 
         }
 
+
+        public List<DAL.ViewModel.CaseTag> cancelCaseMain()
+        {
+            var data = _context.CaseTags.ToList();
+            var mappedData = data.Select(item => new DAL.ViewModel.CaseTag
+            {
+                CaseTagId = item.CaseTagId,
+                Name = item.Name,
+            }).ToList();
+            return mappedData;
+        }
+
         public void cancelCase(AdminDashboardViewModel model,int requestId)
         {
-
             RequestStatusLog requestStatuslog = new RequestStatusLog();
             requestStatuslog.RequestId = requestId;
             requestStatuslog.Status = 5;
             requestStatuslog.Notes = model.Notes;
             _context.Add(requestStatuslog);
             _context.SaveChanges();
-            
+
             var cancel = _context.Requests.FirstOrDefault(x => x.RequestId == requestId);
             cancel.Status = 5;
-            cancel.CaseTag = model.CaseTags;
+            cancel.CaseTag = model.CaseTagss;
 
             _context.SaveChanges();
+        }
+
+        public List<Region> asignCase()
+        {
+            var data = _context.Regions.ToList();
+            var mappedData = data.Select(item => new Region
+            {
+                RegionId = item.RegionId,
+                Name = item.Name,
+            }).ToList();
+            return mappedData;
+        }
+
+        public List<Physician> asignPhysician(int regionId)
+        {
+            var data = _context.Physicians.Where(p => p.RegionId == regionId).ToList();
+            return data;
         }
     }
 }
