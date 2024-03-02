@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\my copy\\HelloDoc2\\HelloDoc2\\HelloDoc2.csproj": {}
+    "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\HelloDoc2\\HelloDoc2.csproj": {}
   },
   "projects": {
-    "D:\\my copy\\HelloDoc2\\BLL\\BLL.csproj": {
+    "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\BLL\\BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\my copy\\HelloDoc2\\BLL\\BLL.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\BLL\\BLL.csproj",
         "projectName": "BLL",
-        "projectPath": "D:\\my copy\\HelloDoc2\\BLL\\BLL.csproj",
-        "packagesPath": "C:\\Users\\pci19\\.nuget\\packages\\",
-        "outputPath": "D:\\my copy\\HelloDoc2\\BLL\\obj\\",
+        "projectPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\BLL\\BLL.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\BLL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pci19\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\my copy\\HelloDoc2\\DAL\\DAL.csproj": {
-                "projectPath": "D:\\my copy\\HelloDoc2\\DAL\\DAL.csproj"
+              "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\DAL.csproj"
               }
             }
           }
@@ -80,40 +80,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\my copy\\HelloDoc2\\DAL\\DAL.csproj": {
+    "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\my copy\\HelloDoc2\\DAL\\DAL.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\my copy\\HelloDoc2\\DAL\\DAL.csproj",
-        "packagesPath": "C:\\Users\\pci19\\.nuget\\packages\\",
-        "outputPath": "D:\\my copy\\HelloDoc2\\DAL\\obj\\",
+        "projectPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\DAL.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pci19\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -171,40 +157,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\my copy\\HelloDoc2\\HelloDoc2\\HelloDoc2.csproj": {
+    "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\HelloDoc2\\HelloDoc2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\my copy\\HelloDoc2\\HelloDoc2\\HelloDoc2.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\HelloDoc2\\HelloDoc2.csproj",
         "projectName": "HelloDoc2",
-        "projectPath": "D:\\my copy\\HelloDoc2\\HelloDoc2\\HelloDoc2.csproj",
-        "packagesPath": "C:\\Users\\pci19\\.nuget\\packages\\",
-        "outputPath": "D:\\my copy\\HelloDoc2\\HelloDoc2\\obj\\",
+        "projectPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\HelloDoc2\\HelloDoc2.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\HelloDoc2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pci19\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -218,11 +190,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\my copy\\HelloDoc2\\BLL\\BLL.csproj": {
-                "projectPath": "D:\\my copy\\HelloDoc2\\BLL\\BLL.csproj"
+              "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\BLL\\BLL.csproj": {
+                "projectPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\BLL\\BLL.csproj"
               },
-              "D:\\my copy\\HelloDoc2\\DAL\\DAL.csproj": {
-                "projectPath": "D:\\my copy\\HelloDoc2\\DAL\\DAL.csproj"
+              "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\DAL.csproj": {
+                "projectPath": "C:\\Users\\DELL\\Desktop\\project\\Hellodoc\\DAL\\DAL.csproj"
               }
             }
           }
@@ -281,24 +253,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -307,7 +261,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
